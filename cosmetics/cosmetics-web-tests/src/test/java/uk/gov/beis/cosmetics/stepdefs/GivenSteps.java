@@ -138,7 +138,7 @@ public class GivenSteps extends SharedWebDriver {
 	public void i_login_as_responsible_person_user() throws Throwable {
 		
 			loginPage.login_as_responsible_person();
-		    loginPage.verifyPageTitle("Your cosmetic products - Submit cosmetic product notifications");
+		    loginPage.verifyPageTitle("Cosmetic products - Submit cosmetic product notifications");
 
 	}
 

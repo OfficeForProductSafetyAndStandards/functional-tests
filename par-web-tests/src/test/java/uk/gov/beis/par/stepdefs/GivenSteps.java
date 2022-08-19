@@ -41,7 +41,7 @@ public class GivenSteps extends SharedWebDriver
 		
 		@Given("^I login as \"(.*?)\"$")
 		public void i_login_as(String arg1) throws Throwable {
-			loginPage.login_as(arg1,"TestPassword");
+			loginPage.login_as(arg1,"Nasir@123");
 			
 		   
 		}

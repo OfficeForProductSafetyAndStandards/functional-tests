@@ -16,7 +16,7 @@ public class LoginPage extends BasePage {
 	private By usernameField = By.name("user[email]");
 	private By passwordField = By.name("user[password]");
 	private By otp_code = By.id("otp_code");
-	private By loginButton = By.xpath("//button[contains(@class,'govuk-button ')]");
+	private By loginButton = By.xpath("//button[contains(@class,'govuk-button')]");
 	
 	private By signInLink = By.xpath("//a[text()='Sign in']");
 	private By signOutLink = By.xpath("//a[text()='Sign out']");

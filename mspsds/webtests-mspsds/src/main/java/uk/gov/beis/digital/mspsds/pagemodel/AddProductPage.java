@@ -52,7 +52,7 @@ public void enter_product_details(String category) throws InterruptedException
 	this.driver.findElement(By.name("product[markings][]")).click();
 	this.select_radio_button_by_text("Exact number known");
 	this.type(this.ts_product_units, "20");
-	this.type(this.ts_product_name,"Auto-test Testproduct");
+	this.type(this.ts_product_name,"Day to night cream");
 	Thread.sleep(5000);
 	this.driver.findElement(By.name("product[when_placed_on_market]")).click();
 	this.type(this.ts_product_description,"This is a auto test product");

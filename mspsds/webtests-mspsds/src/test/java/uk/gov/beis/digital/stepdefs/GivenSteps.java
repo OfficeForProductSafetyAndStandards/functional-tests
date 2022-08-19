@@ -42,7 +42,7 @@ public class GivenSteps {
 	@Given("^I login as OPSS user$")
 	public void i_login_as_OPSS_user() throws Throwable {
 		loginPage.login_as_opss();
-		loginPage.verifyPageTitle("Cases - Product safety database - GOV.UK");
+		loginPage.verifyPageTitle("Your cases - Product Safety Database - GOV.UK");
 		
 }
 

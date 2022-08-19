@@ -6,9 +6,7 @@ Feature: PSD user
 @regression  @covid @ts-case
 Scenario: As Trading standard user, I should be able to create a case
 Given I login as Trading standard user
-When I click button "Open a new case"
-And I select "No, this is business as usual"
-And I click continue on coivid page
+When I click button "Create a case"
 And I enter product details for product category "Clothing, textiles and fashion items"
 And I click continue on ts case creation page
 Then I should see page "Why are you reporting this product?"

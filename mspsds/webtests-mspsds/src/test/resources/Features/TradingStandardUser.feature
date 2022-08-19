@@ -11,4 +11,3 @@ Then I should see "Cases" tab
 And I should see "Businesses" tab
 And I should see "Products" tab
 And I should see "Home" tab
-

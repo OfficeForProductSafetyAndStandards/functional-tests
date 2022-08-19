@@ -79,7 +79,7 @@
           </elementProp>
           <elementProp name="cosmetics-host" elementType="Argument">
             <stringProp name="Argument.name">cosmetics-host</stringProp>
-            <stringProp name="Argument.value">cosmetics-pr-1852-submit-web.london.cloudapps.digital</stringProp>
+            <stringProp name="Argument.value">cosmetics-pr-2252-submit-web.london.cloudapps.digital</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="cosmetics-port" elementType="Argument">
@@ -94,7 +94,7 @@
         <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
           <collectionProp name="Arguments.arguments"/>
         </elementProp>
-        <stringProp name="HTTPSampler.domain">cosmetics-pr-1852-submit-web.london.cloudapps.digital</stringProp>
+        <stringProp name="HTTPSampler.domain">cosmetics-pr-2252-submit-web.london.cloudapps.digital</stringProp>
         <stringProp name="HTTPSampler.port"></stringProp>
         <stringProp name="HTTPSampler.protocol">https</stringProp>
         <stringProp name="HTTPSampler.contentEncoding"></stringProp>
@@ -115,8 +115,8 @@
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <stringProp name="LoopController.loops">1</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">100</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">10</stringProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
         <longProp name="ThreadGroup.start_time">1370726934000</longProp>
         <longProp name="ThreadGroup.end_time">1370726934000</longProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
@@ -136,14 +136,14 @@
         <AuthManager guiclass="AuthPanel" testclass="AuthManager" testname="HTTP Authorization Manager" enabled="true">
           <collectionProp name="AuthManager.auth_list">
             <elementProp name="" elementType="Authorization">
-              <stringProp name="Authorization.url">https://cosmetics-pr-1729-submit-web.london.cloudapps.digital:443/</stringProp>
+              <stringProp name="Authorization.url">https://cosmetics-pr-2252-submit-web.london.cloudapps.digital:443/</stringProp>
               <stringProp name="Authorization.username">cosmetics</stringProp>
               <stringProp name="Authorization.password">reviewAPP</stringProp>
               <stringProp name="Authorization.domain"></stringProp>
               <stringProp name="Authorization.realm"></stringProp>
             </elementProp>
             <elementProp name="" elementType="Authorization">
-              <stringProp name="Authorization.url">https://cosmetics-pr-1729-submit-web.london.cloudapps.digital:443/create-account</stringProp>
+              <stringProp name="Authorization.url">https://cosmetics-pr-2252-submit-web.london.cloudapps.digital:443/create-account</stringProp>
               <stringProp name="Authorization.username">cosmetics</stringProp>
               <stringProp name="Authorization.password">reviewAPP</stringProp>
               <stringProp name="Authorization.domain"></stringProp>
@@ -241,14 +241,14 @@
                 <elementProp name="registration_new_account_form[full_name]" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">true</boolProp>
                   <stringProp name="Argument.name">registration_new_account_form[full_name]</stringProp>
-                  <stringProp name="Argument.value">load test</stringProp>
+                  <stringProp name="Argument.value">nasir khan,.</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
                 <elementProp name="registration_new_account_form[email]" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">true</boolProp>
                   <stringProp name="Argument.name">registration_new_account_form[email]</stringProp>
-                  <stringProp name="Argument.value">loadtest${counter}@example.com</stringProp>
+                  <stringProp name="Argument.value">nasirkhan.beis@example.com</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
