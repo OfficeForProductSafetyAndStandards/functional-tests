@@ -9,11 +9,7 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="number_of_responsible_person_users" elementType="Argument">
             <stringProp name="Argument.name">number_of_responsible_person_users</stringProp>
-<<<<<<< HEAD
-            <stringProp name="Argument.value">10</stringProp>
-=======
-            <stringProp name="Argument.value">3</stringProp>
->>>>>>> master
+            <stringProp name="Argument.value">500</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="number_of_poison_centre_users" elementType="Argument">
@@ -23,16 +19,12 @@
           </elementProp>
           <elementProp name="number_of_uploads_per_user" elementType="Argument">
             <stringProp name="Argument.name">number_of_uploads_per_user</stringProp>
-<<<<<<< HEAD
-            <stringProp name="Argument.value">3</stringProp>
-=======
-            <stringProp name="Argument.value">10</stringProp>
->>>>>>> master
+            <stringProp name="Argument.value">1</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="ramp_up_time" elementType="Argument">
             <stringProp name="Argument.name">ramp_up_time</stringProp>
-            <stringProp name="Argument.value">1</stringProp>
+            <stringProp name="Argument.value">8</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
@@ -54,11 +46,7 @@
           </elementProp>
           <elementProp name="number_of_uploads_per_user" elementType="Argument">
             <stringProp name="Argument.name">number_of_uploads_per_user</stringProp>
-<<<<<<< HEAD
-            <stringProp name="Argument.value">3</stringProp>
-=======
-            <stringProp name="Argument.value">10</stringProp>
->>>>>>> master
+            <stringProp name="Argument.value">1</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
@@ -980,15 +968,15 @@ vars.put(&quot;user_number&quot;, Integer.toString(threadNumber));</stringProp>
               <collectionProp name="Arguments.arguments">
                 <elementProp name="notification_filename" elementType="Argument">
                   <stringProp name="Argument.name">notification_filename</stringProp>
-                  <stringProp name="Argument.value">notification-files/file-</stringProp>
+                  <stringProp name="Argument.value">file-</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                 </elementProp>
               </collectionProp>
             </Arguments>
             <hashTree/>
             <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Uniform Random Timer" enabled="true">
-              <stringProp name="ConstantTimer.delay">5000</stringProp>
-              <stringProp name="RandomTimer.range">100.0</stringProp>
+              <stringProp name="ConstantTimer.delay">0</stringProp>
+              <stringProp name="RandomTimer.range">0</stringProp>
             </UniformRandomTimer>
             <hashTree/>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Notification Upload Page" enabled="true">
@@ -1035,8 +1023,53 @@ vars.put(&quot;user_number&quot;, Integer.toString(threadNumber));</stringProp>
             <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Upload Notification File" enabled="true">
               <elementProp name="HTTPsampler.Files" elementType="HTTPFileArgs">
                 <collectionProp name="HTTPFileArgs.files">
-                  <elementProp name="${notification_filename}${file_id}.zip" elementType="HTTPFileArg">
-                    <stringProp name="File.path">${notification_filename}${file_id}.zip</stringProp>
+                  <elementProp name="file-1.zip" elementType="HTTPFileArg">
+                    <stringProp name="File.path">file-1.zip</stringProp>
+                    <stringProp name="File.paramname">uploaded_files[]</stringProp>
+                    <stringProp name="File.mimetype">application/zip</stringProp>
+                  </elementProp>
+                  <elementProp name="file-2.zip" elementType="HTTPFileArg">
+                    <stringProp name="File.path">file-2.zip</stringProp>
+                    <stringProp name="File.paramname">uploaded_files[]</stringProp>
+                    <stringProp name="File.mimetype">application/zip</stringProp>
+                  </elementProp>
+                  <elementProp name="file-3.zip" elementType="HTTPFileArg">
+                    <stringProp name="File.path">file-3.zip</stringProp>
+                    <stringProp name="File.paramname">uploaded_files[]</stringProp>
+                    <stringProp name="File.mimetype">application/zip</stringProp>
+                  </elementProp>
+                  <elementProp name="file-4.zip" elementType="HTTPFileArg">
+                    <stringProp name="File.path">file-4.zip</stringProp>
+                    <stringProp name="File.paramname">uploaded_files[]</stringProp>
+                    <stringProp name="File.mimetype">application/zip</stringProp>
+                  </elementProp>
+                  <elementProp name="file-5.zip" elementType="HTTPFileArg">
+                    <stringProp name="File.path">file-5.zip</stringProp>
+                    <stringProp name="File.paramname">uploaded_files[]</stringProp>
+                    <stringProp name="File.mimetype">application/zip</stringProp>
+                  </elementProp>
+                  <elementProp name="file-6.zip" elementType="HTTPFileArg">
+                    <stringProp name="File.path">file-6.zip</stringProp>
+                    <stringProp name="File.paramname">uploaded_files[]</stringProp>
+                    <stringProp name="File.mimetype">application/zip</stringProp>
+                  </elementProp>
+                  <elementProp name="file-7.zip" elementType="HTTPFileArg">
+                    <stringProp name="File.path">file-7.zip</stringProp>
+                    <stringProp name="File.paramname">uploaded_files[]</stringProp>
+                    <stringProp name="File.mimetype">application/zip</stringProp>
+                  </elementProp>
+                  <elementProp name="file-8.zip" elementType="HTTPFileArg">
+                    <stringProp name="File.path">file-8.zip</stringProp>
+                    <stringProp name="File.paramname">uploaded_files[]</stringProp>
+                    <stringProp name="File.mimetype">application/zip</stringProp>
+                  </elementProp>
+                  <elementProp name="file-9.zip" elementType="HTTPFileArg">
+                    <stringProp name="File.path">file-9.zip</stringProp>
+                    <stringProp name="File.paramname">uploaded_files[]</stringProp>
+                    <stringProp name="File.mimetype">application/zip</stringProp>
+                  </elementProp>
+                  <elementProp name="file-10.zip" elementType="HTTPFileArg">
+                    <stringProp name="File.path">file-10.zip</stringProp>
                     <stringProp name="File.paramname">uploaded_files[]</stringProp>
                     <stringProp name="File.mimetype">application/zip</stringProp>
                   </elementProp>
@@ -1222,6 +1255,15 @@ vars.put(&quot;user_number&quot;, Integer.toString(threadNumber));</stringProp>
           </objProp>
           <stringProp name="filename"></stringProp>
         </ResultCollector>
+        <hashTree/>
+        <ConstantThroughputTimer guiclass="TestBeanGUI" testclass="ConstantThroughputTimer" testname="Constant Throughput Timer" enabled="false">
+          <intProp name="calcMode">0</intProp>
+          <doubleProp>
+            <name>throughput</name>
+            <value>120.0</value>
+            <savedValue>0.0</savedValue>
+          </doubleProp>
+        </ConstantThroughputTimer>
         <hashTree/>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Poison Centres - Thread Group" enabled="false">
