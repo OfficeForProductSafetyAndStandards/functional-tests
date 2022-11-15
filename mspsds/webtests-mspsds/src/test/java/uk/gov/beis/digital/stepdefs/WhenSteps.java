@@ -7,31 +7,37 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
 
-import cucumber.api.PendingException;
-import cucumber.api.Scenario;
-import cucumber.api.java.After;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.java.After;
+import io.cucumber.java.PendingException;
+import io.cucumber.java.Scenario;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import uk.gov.beis.digital.BasePage;
+import uk.gov.beis.digital.SharedWebdriver;
 import uk.gov.beis.digital.mspsds.pagemodel.AddProductPage;
 import uk.gov.beis.digital.mspsds.pagemodel.CasesPage;
 import uk.gov.beis.digital.mspsds.pagemodel.DashboardPage;
 import uk.gov.beis.digital.mspsds.pagemodel.LoginPage;
 
-public class WhenSteps extends SharedWebDriver{
+public class WhenSteps extends BasePage {
 	
 	private WebDriver driver;
 	DashboardPage dashpge;
 	CasesPage casepge;
-	private LoginPage loginPage;
-	private AddProductPage addProductPage;
-	public WhenSteps(SharedWebDriver driver)
+	LoginPage loginPage;
+	AddProductPage addProductPage;
+	SharedWebdriver shrdDriver;
+
+	public WhenSteps(SharedWebdriver driver)
 	{
-		this.driver = driver;
-		dashpge = PageFactory.initElements(driver, DashboardPage.class);
-		casepge = PageFactory.initElements(driver, CasesPage.class);
-		loginPage = PageFactory.initElements(driver, LoginPage.class);
-		addProductPage = PageFactory.initElements(driver, AddProductPage.class);
+		super(driver);
+		this.shrdDriver = driver;
+		
+		dashpge = new DashboardPage(shrdDriver);
+		casepge = new CasesPage(shrdDriver);
+		loginPage = new LoginPage(shrdDriver);
+		addProductPage = new AddProductPage(shrdDriver);
 	}
 
 	
@@ -223,6 +229,11 @@ public void i_enter_product_name() throws Throwable {
 public void i_enter_description_of_the_product(String arg1) throws Throwable {
     // Write code here that turns the phrase above into concrete actions
     throw new PendingException();
+}
+
+@When("I click the button {string}")
+public void i_click_the_button(String string) {
+    dashpge.click_create_project();
 }
 
 @When("^I click continue$")
@@ -432,23 +443,23 @@ public void i_click_create_project() throws Throwable {
    
 }
 
-	
-	@After()
-	/*
-	 * Embed a screenshot in test report if test is marked as failed
-	 */
-	public void embedScreenshot(Scenario scenario) {
-		if (scenario.isFailed()) {
-			try {
-				scenario.write("Current Page URL is " + driver.getCurrentUrl());
-				// byte[] screenshot = getScreenshotAs(OutputType.BYTES);
-				byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-				scenario.embed(screenshot, "image/png");
-			} catch (WebDriverException somePlatformsDontSupportScreenshots) {
-				System.err.println(somePlatformsDontSupportScreenshots.getMessage());
-			}
-		}
-	}
+//	
+//	@After()
+//	/*
+//	 * Embed a screenshot in test report if test is marked as failed
+//	 */
+//	public void embedScreenshot(Scenario scenario) {
+//		if (scenario.isFailed()) {
+//			try {
+//				//scenario.write("Current Page URL is " + driver.getCurrentUrl());
+//				// byte[] screenshot = getScreenshotAs(OutputType.BYTES);
+//				byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+//				//scenario.embed(screenshot, "image/png");
+//			} catch (WebDriverException somePlatformsDontSupportScreenshots) {
+//				System.err.println(somePlatformsDontSupportScreenshots.getMessage());
+//			}
+//		}
+//	}
 
 
 }

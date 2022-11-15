@@ -39,7 +39,7 @@ And I enter contact details
 And I enter allegation details
 Then I should see "Allegation was successfully created"
 
-@regression 
+@regression @fix
 Scenario Outline: As OPSSuser, I should be able to create a case
 Given I login as OPSS user
 When I click button "Create a case"
@@ -57,14 +57,14 @@ Examples:
 |Cosmetics						  						 |Burns		   |
 
 
-@regression @enquiry
+@regression @enquiry @fix
 Scenario: As opss user, I should be able to create an enquiry
 Given I login as OPSS user
 When I click button "Create a case"
 And I select case type "Enquiry"
 And I enter a date as when it was received
 And I select how it was received "Email"
-And I click continue 
+And I click continue
 Then I should see page "New enquiry"
 
 When I select source "A consumer"
@@ -75,7 +75,7 @@ And I enter enquriy details
 And I click continue input
 Then I should see "Enquiry was successfully created."
 
-@regression
+@regression @fix1
 Scenario: As opss user, I should be able to create an enquiry
 Given I login as OPSS user
 When I click button "Create a case"
@@ -93,14 +93,14 @@ And I enter enquriy details
 And I click continue input
 Then I should see "Enquiry was successfully created."
 
-@regression @project
+@regression @project @fix1
 Scenario: As OPSS user, I should be able to create a project
 Given I login as OPSS user
 When I click button "Create a case"
 And I select case type "Project"
 And I enter project title
 And I enter project summary
-And I click continue
+And I click the button "Create project"
 Then I should see "Project was successfully created"
 
 

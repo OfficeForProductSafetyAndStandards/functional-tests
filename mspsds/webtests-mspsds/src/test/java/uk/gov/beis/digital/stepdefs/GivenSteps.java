@@ -7,19 +7,21 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
 
-import cucumber.api.PendingException;
-import cucumber.api.Scenario;
-import cucumber.api.java.After;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.cucumber.core.*;
+import io.cucumber.java.After;
+import io.cucumber.java.Scenario;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.When;
+import io.cucumber.java.en.Then;
+import uk.gov.beis.digital.BasePage;
+import uk.gov.beis.digital.SharedWebdriver;
 import uk.gov.beis.digital.mspsds.Utils.AppProperties;
 import uk.gov.beis.digital.mspsds.Utils.EnvironmentProperties;
 import uk.gov.beis.digital.mspsds.pagemodel.AssigneePage;
 import uk.gov.beis.digital.mspsds.pagemodel.CasesPage;
 import uk.gov.beis.digital.mspsds.pagemodel.LoginPage;
 
-public class GivenSteps {
+public class GivenSteps extends BasePage {
 
 	private LoginPage loginPage;
 	private AssigneePage assigneePage;
@@ -27,16 +29,14 @@ public class GivenSteps {
 	private String platform=AppProperties.get("platform");
 	private WebDriver driver;
 	
-	private String kc_url = AppProperties.get("KC_URL");
-	private String kc_pwd = AppProperties.get("KC_password");
-
-
-	public GivenSteps(SharedWebDriver driver) {
-		this.driver=driver;
-		loginPage = PageFactory.initElements(driver, LoginPage.class);
-		assigneePage = PageFactory.initElements(driver, AssigneePage.class);
-		casesPage = PageFactory.initElements(driver,CasesPage.class);
-		
+	SharedWebdriver shrdDriver;
+	
+	public GivenSteps(SharedWebdriver driver)
+	{
+		super(driver);
+		shrdDriver=driver;
+		//this.driver= basepge.getDriver();
+		loginPage = new LoginPage(shrdDriver);
 	}
 
 	@Given("^I login as OPSS user$")
@@ -59,14 +59,6 @@ public class GivenSteps {
 
 		assigneePage.click_change_owner();
 }
-	@Given("^I login as keycloack Admin user$")
-	public void i_login_as_keycloack_Admin_user() throws Throwable {
-		loginPage.launch_app(kc_url);
-		Thread.sleep(3000);
-		loginPage.login_as_kc_admin("Admin",kc_pwd);
-		//loginPage.login_as_kc_admin("",kc_pwd);
-	    
-	}
 
 	@When("^I go to users$")
 	public void i_go_to_users() throws Throwable {
@@ -99,22 +91,22 @@ public class GivenSteps {
 	}
 
 	
-	@After()
-	/*
-	 * Embed a screenshot in test report if test is marked as failed
-	 */
-	public void embedScreenshot(Scenario scenario) {
-		if (scenario.isFailed()) {
-			try {
-				scenario.write("Current Page URL is " + driver.getCurrentUrl());
-				// byte[] screenshot = getScreenshotAs(OutputType.BYTES);
-				byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-				scenario.embed(screenshot, "image/png");
-			} catch (WebDriverException somePlatformsDontSupportScreenshots) {
-				System.err.println(somePlatformsDontSupportScreenshots.getMessage());
-			}
-		}
-	}
+//	@After()
+//	/*
+//	 * Embed a screenshot in test report if test is marked as failed
+//	 */
+//	public void embedScreenshot(Scenario scenario) {
+//		if (scenario.isFailed()) {
+//			try {
+//				scenario.attach(platform, kc_url, kc_pwd);
+//				// byte[] screenshot = getScreenshotAs(OutputType.BYTES);
+//				byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+//				scenario.attach(platform, kc_url, kc_pwd);
+//			} catch (WebDriverException somePlatformsDontSupportScreenshots) {
+//				System.err.println(somePlatformsDontSupportScreenshots.getMessage());
+//			}
+//		}
+//	}
 
 
 }

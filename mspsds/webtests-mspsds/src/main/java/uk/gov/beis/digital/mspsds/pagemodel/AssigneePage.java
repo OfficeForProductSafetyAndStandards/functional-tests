@@ -7,18 +7,25 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import cucumber.api.DataTable;
+import io.cucumber.datatable.DataTable;
 import uk.gov.beis.digital.BasePage;
+import uk.gov.beis.digital.SharedWebdriver;
 
 import static org.junit.Assert.assertTrue;
 
 public class AssigneePage extends BasePage {
 	By team_elements = By.xpath("//label[contains(@class,'label')]");
 	By change_case_owner = By.xpath("//a[contains(.,'Change case owner')]");
+	private WebDriver driver;
+
 	
-	public AssigneePage(WebDriver driver) {
-		super(driver);
-		
+	SharedWebdriver shrdWebdriver;
+	
+	public AssigneePage(SharedWebdriver shrdWebdriver)
+	{
+		super(shrdWebdriver);
+		this.shrdWebdriver = shrdWebdriver;
+		this.driver = shrdWebdriver.getDriver();
 	}
 	
 	public void click_change_owner()
@@ -29,10 +36,10 @@ public class AssigneePage extends BasePage {
 	
 public void verify_priority_team(DataTable team_list)
 {
-	List<List<String>> list = team_list.raw();
-	assertTrue("Failed:team not found",this.getText(team_elements).contains(list.get(0).get(1)));
-	assertTrue("Failed:team not found",this.getText(team_elements).contains(list.get(0).get(2)));
-	assertTrue("Failed:team not found",this.getText(team_elements).contains(list.get(0).get(3)));
+	List<String> list = team_list.asList();
+	assertTrue("Failed:team not found",this.getText(team_elements).contains(list.get(0).subSequence(1,0)));
+	assertTrue("Failed:team not found",this.getText(team_elements).contains(list.get(0).subSequence(2, 0)));
+	assertTrue("Failed:team not found",this.getText(team_elements).contains(list.get(0).subSequence(3, 0)));
 }
 	
 
@@ -47,8 +54,8 @@ public void verify_priority_team(DataTable team_list)
 //			    assertTrue("Failed:Expected team not displayed",this.getText(team).contains(list.get(j).toString()));
 //			}	
 //	}
-	
-	
+//	
+//	
 //	public Boolean verify_priority_team_list(DataTable team_list) throws Exception
 //	{
 //		Boolean flag=false;

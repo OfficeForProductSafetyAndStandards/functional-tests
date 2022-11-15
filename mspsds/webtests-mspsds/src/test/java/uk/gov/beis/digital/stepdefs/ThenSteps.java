@@ -6,30 +6,38 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
+
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.After;
+import io.cucumber.java.en.Then;
+import io.cucumber.messages.types.Scenario;
+
 import static org.junit.Assert.assertTrue;
 
-import cucumber.api.DataTable;
-import cucumber.api.Scenario;
-import cucumber.api.java.After;
-import cucumber.api.java.en.Then;
+import uk.gov.beis.digital.BasePage;
+import uk.gov.beis.digital.SharedWebdriver;
 import uk.gov.beis.digital.mspsds.pagemodel.AssigneePage;
 import uk.gov.beis.digital.mspsds.pagemodel.CasesPage;
 import uk.gov.beis.digital.mspsds.pagemodel.DashboardPage;
+import uk.gov.beis.digital.mspsds.pagemodel.LoginPage;
 
-public class ThenSteps {
+public class ThenSteps extends BasePage {
 	private WebDriver driver;
 	AssigneePage assignpge;
 	DashboardPage dashpge;
 	CasesPage casesPage;
 	
-	public ThenSteps(SharedWebDriver driver)
-	{
-		this.driver= driver;
-		assignpge = PageFactory.initElements(driver,AssigneePage.class);
-		dashpge = PageFactory.initElements(driver,DashboardPage.class);
-		casesPage = PageFactory.initElements(driver, CasesPage.class);
-		
-	}
+SharedWebdriver shrdDriver;
+
+public ThenSteps(SharedWebdriver driver)
+{
+	super(driver);
+	shrdDriver=driver;
+	assignpge = new AssigneePage(shrdDriver);
+	dashpge = new DashboardPage(shrdDriver);
+	casesPage = new CasesPage(shrdDriver);
+}
+
 
 	@Then("^I should be able to see prioritise team list under teams$")
 	public void i_should_be_able_to_see_prioritise_team_list_under_teams(DataTable arg1) throws Throwable {
@@ -85,21 +93,21 @@ public class ThenSteps {
 		casesPage.click(casesPage.corrective_action_continue);
 	}
 	
-	@After()
-	/*
-	 * Embed a screenshot in test report if test is marked as failed
-	 */
-	public void embedScreenshot(Scenario scenario) {
-		if (scenario.isFailed()) {
-			try {
-				scenario.write("Current Page URL is " + driver.getCurrentUrl());
-				// byte[] screenshot = getScreenshotAs(OutputType.BYTES);
-				byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-				scenario.embed(screenshot, "image/png");
-			} catch (WebDriverException somePlatformsDontSupportScreenshots) {
-				System.err.println(somePlatformsDontSupportScreenshots.getMessage());
-			}
-		}
-	}
+//	@After()
+//	/*
+//	 * Embed a screenshot in test report if test is marked as failed
+//	 */
+//	public void embedScreenshot(Scenario scenario) {
+//		if (scenario.equals("failed:")) {
+//			try {
+//			//	scenario.write("Current Page URL is " + driver.getCurrentUrl());
+//				// byte[] screenshot = getScreenshotAs(OutputType.BYTES);
+//				byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+//				//scenario.attach(screenshot, "image/png");
+//			} catch (WebDriverException somePlatformsDontSupportScreenshots) {
+//				System.err.println(somePlatformsDontSupportScreenshots.getMessage());
+//			}
+//		}
+//	}
 	
 }

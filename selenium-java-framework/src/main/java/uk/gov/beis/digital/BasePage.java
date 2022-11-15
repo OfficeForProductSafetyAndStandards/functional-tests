@@ -10,6 +10,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
@@ -17,28 +18,31 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+
 import static org.junit.Assert.assertTrue;
 
 /**
  * @ @author nasirkhan @
  *
  */
-public class BasePage {
+public class BasePage{
 	private WebDriver driver;
 	private WebDriverWait wait;
 	private static final int TIMEOUT = 5;
 	private static final int POLLING = 50;
 	By cases = By.cssSelector("#h1.govuk-heading-l");
-	By banner_message = By.xpath("//div[@class='hmcts-banner__message']");
+	By banner_message = By.xpath("//div[@class='govuk-notification-banner__content']");
+    SharedWebdriver shrdDriver;
+//	protected SearchContext getSearchCtx() {
+//		return driver;
+//	}
+	
 
-	protected SearchContext getSearchCtx() {
-		return driver;
-	}
-
-	public BasePage(WebDriver driver) {
-		this.driver = driver;
-		wait = new WebDriverWait(driver, TIMEOUT, POLLING);
-		PageFactory.initElements(new AjaxElementLocatorFactory(driver, TIMEOUT), this);
+	
+	
+	public BasePage(SharedWebdriver shrdDriver) {
+		this.shrdDriver=shrdDriver;
+		this.driver= shrdDriver.getDriver();
 	}
 
 	public void launch_app(String url) throws InterruptedException {
@@ -263,6 +267,10 @@ public class BasePage {
 		}
    }
    
+   public void click_create_project()
+   {
+	   driver.findElement(By.xpath("//button[normalize-space()='Create project']")).click();
+   }
    
    
    
@@ -308,10 +316,18 @@ public class BasePage {
 	
 	public void click_continue()
 	{
-		driver.findElement(By.xpath("//button[@class='govuk-button ']")).click();
+		driver.findElement(By.xpath("//button[normalize-space()='Continue']")).click();
+		
 		
 	//driver.findElement(By.xpath("//button[contains(.,'Continue')]")).click();
 	}
+	
+	public void click_create_button()
+	{
+		driver.findElement(By.xpath("//button[normalize-space()='Create project']")).click();
+				
+	}
+	
 	
 	public void click_continue_input()
 	{

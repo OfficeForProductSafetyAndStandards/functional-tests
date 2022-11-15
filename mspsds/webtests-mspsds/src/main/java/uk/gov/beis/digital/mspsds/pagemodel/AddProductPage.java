@@ -8,12 +8,14 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import cucumber.api.DataTable;
 import uk.gov.beis.digital.BasePage;
+import uk.gov.beis.digital.SharedWebdriver;
 
 import static org.junit.Assert.assertTrue;
 
 public class AddProductPage extends BasePage {
+	
+	
 
 	
 	By ts_prod_category = By.cssSelector("#category");
@@ -32,12 +34,21 @@ public class AddProductPage extends BasePage {
 	
 	private WebDriver driver;
 	
-	public AddProductPage(WebDriver driver) {
-		
-		super(driver);
-		this.driver=driver;
+SharedWebdriver shrdWebdriver;
+	
+	public AddProductPage(SharedWebdriver shrdWebdriver)
+	{
+		super(shrdWebdriver);
+		this.shrdWebdriver = shrdWebdriver;
+		this.driver = shrdWebdriver.getDriver();
 	}
-		
+	
+//	public AddProductPage(WebDriver driver) {
+//		
+//		super(driver);
+//		this.driver=driver;
+//	}
+//		
 
 	
 public void enter_product_details(String category) throws InterruptedException

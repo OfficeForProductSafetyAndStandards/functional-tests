@@ -1,35 +1,43 @@
 package uk.gov.beis.digital.mspsds.pagemodel;
 
+import static org.junit.Assert.assertTrue;
+
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
 import uk.gov.beis.digital.BasePage;
+import uk.gov.beis.digital.SharedWebdriver;
 import uk.gov.beis.digital.mspsds.Utils.EnvironmentProperties;
+import uk.gov.beis.digital.stepdefs.SharedWebDriver;
 
-import static org.junit.Assert.assertTrue;
 
-public class LoginPage extends BasePage {
+
+public class LoginPage extends BasePage{
 	
-	private WebDriver driver;
+	private SharedWebDriver launchbrowser;
 	
-	private By usernameField = By.name("user[email]");
-	private By passwordField = By.name("user[password]");
+	private By usernameField = By.id("email");
+	private By passwordField = By.id("password");
 	private By otp_code = By.id("otp_code");
-	private By loginButton = By.xpath("//button[contains(@class,'govuk-button')]");
+	private By loginButton = By.xpath("//button[normalize-space()='Continue']");
 	
 	private By signInLink = By.xpath("//a[text()='Sign in']");
 	private By signOutLink = By.xpath("//a[text()='Sign out']");
 	private By expiryUnits = By.name("reqActionsEmailTimeoutUnit");
 	private By client_app = By.id("clients");
 	private By req_actions = By.id("reqActions");
-
-	public LoginPage(WebDriver driver)
+	private WebDriver driver;
+	
+    SharedWebdriver shrdWebdriver;
+	
+	public LoginPage(SharedWebdriver shrdWebdriver)
 	{
-		super(driver);
-		this.driver = driver;
+		super(shrdWebdriver);
+		this.shrdWebdriver = shrdWebdriver;
+		this.driver = shrdWebdriver.getDriver();
 	}
-
+	
+	
 	public void login_as(String username, String password) throws InterruptedException
 	{
 		this.driver.manage().deleteAllCookies();

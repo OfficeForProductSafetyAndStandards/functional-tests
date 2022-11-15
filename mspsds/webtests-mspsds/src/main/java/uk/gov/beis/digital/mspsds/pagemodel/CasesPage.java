@@ -11,8 +11,9 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import cucumber.api.DataTable;
+
 import uk.gov.beis.digital.BasePage;
+import uk.gov.beis.digital.SharedWebdriver;
 import uk.gov.beis.digital.mspsds.Utils.AppProperties;
 
 
@@ -77,11 +78,13 @@ public class CasesPage extends BasePage {
 	
 	
 	
-	public CasesPage(WebDriver driver) {
-		
-		super(driver);
-		this.driver=driver;
-		
+SharedWebdriver shrdWebdriver;
+	
+	public CasesPage(SharedWebdriver shrdWebdriver)
+	{
+		super(shrdWebdriver);
+		this.shrdWebdriver = shrdWebdriver;
+		this.driver = shrdWebdriver.getDriver();
 	}
 	
 	public void open_case_page()
