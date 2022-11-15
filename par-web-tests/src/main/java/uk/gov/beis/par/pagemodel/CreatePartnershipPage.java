@@ -7,6 +7,8 @@ import uk.gov.beis.par.Utils.AppProperties;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.Date;
+
 public class CreatePartnershipPage extends BasePage {
 
 	private WebDriver driver;
@@ -57,7 +59,7 @@ public class CreatePartnershipPage extends BasePage {
 	public void fill_in_partnership_details() throws InterruptedException
 	{
 		
-		this.type(aboutPartnership, "Automated test generated "+ this.generate_string(10));
+		this.type(aboutPartnership, "test inspection plan "+ (new Date().getDate()));
 		Thread.sleep(2000);
 		this.click_continue();
 		this.type(orga_name, "Automated test org"+this.generate_string(5));

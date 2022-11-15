@@ -23,10 +23,8 @@ Then I should see "Products" list page
 
 Scenario: As OPSSuser, I should be able to create a case
 Given I login as OPSS user
-When I click button "Open a new case"
+When I click button "Create a case"
 And I select case type "Product safety allegation"
-And I select "No, this is business as usual"
-And I click continue on coivid page
 And I select reporter as "Local authority (Trading Standards)"
 And I enter contact details
 And I enter allegation details
@@ -34,29 +32,23 @@ Then I should see "Allegation was successfully created"
 
 Scenario: As OPSSuser, I should be able to create a case with covid flag
 Given I login as OPSS user
-When I click button "Open a new case"
+When I click button "Create a case"
 And I select case type "Product safety allegation"
-And I select "Yes, it is (or could be)"
-And I click continue on coivid page
 And I select reporter as "Local authority (Trading Standards)"
 And I enter contact details
 And I enter allegation details
 Then I should see "Allegation was successfully created"
-And I should see covid badge displayed on the case overview page
 
-@regression 
+@regression @fix
 Scenario Outline: As OPSSuser, I should be able to create a case
 Given I login as OPSS user
-When I click button "Open a new case"
+When I click button "Create a case"
 And I select case type "Product safety allegation"
-And I select "Yes, it is (or could be)"
-And I click continue on coivid page
 And I select reporter as "Local authority (Trading Standards)"
 And I enter contact details
 And I enter allegation details for product category "<Prod_cat>"
 And I enter hazard type as "<Hazard-type>"
 Then I should see "Allegation was successfully created"
-And I should see covid badge displayed on the case overview page
 
 Examples:
 
@@ -65,16 +57,14 @@ Examples:
 |Cosmetics						  						 |Burns		   |
 
 
-@regression @enquiry
+@regression @enquiry @fix
 Scenario: As opss user, I should be able to create an enquiry
 Given I login as OPSS user
-When I click button "Open a new case"
+When I click button "Create a case"
 And I select case type "Enquiry"
-And I select "No, this is business as usual"
-And I click continue on coivid page
 And I enter a date as when it was received
 And I select how it was received "Email"
-And I click continue 
+And I click continue
 Then I should see page "New enquiry"
 
 When I select source "A consumer"
@@ -85,13 +75,11 @@ And I enter enquriy details
 And I click continue input
 Then I should see "Enquiry was successfully created."
 
-@regression
+@regression @fix1
 Scenario: As opss user, I should be able to create an enquiry
 Given I login as OPSS user
-When I click button "Open a new case"
+When I click button "Create a case"
 And I select case type "Enquiry"
-And I select "Yes, it is (or could be)"
-And I click continue on coivid page
 And I enter a date as when it was received
 And I select how it was received "Phone"
 And I click continue 
@@ -104,19 +92,15 @@ And I click continue input
 And I enter enquriy details
 And I click continue input
 Then I should see "Enquiry was successfully created."
-And I should see covid badge displayed on the case overview page
 
-@regression @project
+@regression @project @fix1
 Scenario: As OPSS user, I should be able to create a project
 Given I login as OPSS user
-When I click button "Open a new case"
+When I click button "Create a case"
 And I select case type "Project"
-And I select "Yes, it is (or could be)"
-And I click continue on coivid page
 And I enter project title
 And I enter project summary
-And I click continue
+And I click the button "Create project"
 Then I should see "Project was successfully created"
-And I should see covid badge displayed on the case overview page
 
 

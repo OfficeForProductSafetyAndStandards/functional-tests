@@ -9,7 +9,7 @@ import cucumber.api.junit.Cucumber;
 @CucumberOptions(
 	format = { "html:target/cucumber-reports/html", "json:target/cucumber-reports/cucumber.json" },
 	features = { "src/test/resources/functional/features/" },
-	tags = { "@nasir","~@ignore,@Pending" },
+	tags = { "@regression","~@ignore,@Pending" },
 	glue="uk.gov.beis.par.stepdefs"
 )
 public class RegressionTest {

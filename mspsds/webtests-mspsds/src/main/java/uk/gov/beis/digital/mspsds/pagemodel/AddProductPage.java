@@ -8,12 +8,14 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import cucumber.api.DataTable;
 import uk.gov.beis.digital.BasePage;
+import uk.gov.beis.digital.SharedWebdriver;
 
 import static org.junit.Assert.assertTrue;
 
 public class AddProductPage extends BasePage {
+	
+	
 
 	
 	By ts_prod_category = By.cssSelector("#category");
@@ -28,15 +30,25 @@ public class AddProductPage extends BasePage {
 	By ts_business_name = By.cssSelector("#business_trading_name");
 	By ts_business_legalname = By.cssSelector("#business_legal_name");
 	By ts_create_case = By.xpath("//input[@name='commit']");
+	By ts_product_units = By.xpath("//input[@id='exact_units']");
 	
 	private WebDriver driver;
 	
-	public AddProductPage(WebDriver driver) {
-		
-		super(driver);
-		this.driver=driver;
+SharedWebdriver shrdWebdriver;
+	
+	public AddProductPage(SharedWebdriver shrdWebdriver)
+	{
+		super(shrdWebdriver);
+		this.shrdWebdriver = shrdWebdriver;
+		this.driver = shrdWebdriver.getDriver();
 	}
-		
+	
+//	public AddProductPage(WebDriver driver) {
+//		
+//		super(driver);
+//		this.driver=driver;
+//	}
+//		
 
 	
 public void enter_product_details(String category) throws InterruptedException
@@ -44,8 +56,16 @@ public void enter_product_details(String category) throws InterruptedException
 	this.type(this.ts_prod_category,category);
 	find(this.ts_prod_category).sendKeys(Keys.ENTER);
 	this.type(this.ts_product_type,"Auto-test dishwasher");
-	this.select_radio_button_by_text("No");
-	this.type(this.ts_product_name,"Auto-test Testproduct");
+	Thread.sleep(2000);
+	this.select_radio_button_by_text("Yes");
+	Thread.sleep(5000);
+	this.driver.findElement(By.name("product[has_markings]")).click();
+	this.driver.findElement(By.name("product[markings][]")).click();
+	this.select_radio_button_by_text("Exact number known");
+	this.type(this.ts_product_units, "20");
+	this.type(this.ts_product_name,"Day to night cream");
+	Thread.sleep(5000);
+	this.driver.findElement(By.name("product[when_placed_on_market]")).click();
 	this.type(this.ts_product_description,"This is a auto test product");
 	
 	

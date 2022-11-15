@@ -5,19 +5,18 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.SystemUtils;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.ie.InternetExplorerDriver;
+
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
+
 
 import uk.gov.beis.digital.mspsds.Utils.AppProperties;
 import uk.gov.beis.digital.mspsds.Utils.EnvironmentProperties;
 
-public class SharedWebDriver extends EventFiringWebDriver {
+public class SharedWebDriver  {
 	// private static AndroidDriver driver1;
 	private static WebDriver driver;
 	/*
@@ -78,7 +77,7 @@ public class SharedWebDriver extends EventFiringWebDriver {
 				driver = new RemoteWebDriver(new URL(URL), caps);
 				
 
-				driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+				//driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
 				driver.navigate().to(env);
 				driver.manage().window().maximize();
 				
@@ -90,15 +89,15 @@ public class SharedWebDriver extends EventFiringWebDriver {
 						System.getProperty("user.dir") + "/src/test/resources/chromedriver");
 				ChromeOptions options = new ChromeOptions();
 				//options.setHeadless(true);
-				options.addArguments("no-sandbox");
-				options.addArguments("disable-dev-shm-usage");
-				options.addArguments("window-size=1024x768");
+				//options.addArguments("no-sandbox");
+				//options.addArguments("disable-dev-shm-usage");
+				//options.addArguments("window-size=1024x768");
 				
 
-				driver = new ChromeDriver(options);
+				driver = new ChromeDriver();
 				System.out.println("#####Started test run on  " + envurl + "  on " + browser + " browser #####");
 		
-				driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+				//driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
 				driver.navigate().to(envurl);
 				driver.manage().window().maximize();
 				//driver.manage().deleteAllCookies();
@@ -116,7 +115,7 @@ public class SharedWebDriver extends EventFiringWebDriver {
 
 				driver.manage().window().maximize();
 				System.out.println("#####Started test run on  " + Envurl + "  on " + browser + " browser #####");
-				driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+				//driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
 				driver.navigate().to(Envurl);
 				driver.manage().window().maximize();
 			}
@@ -138,7 +137,13 @@ public class SharedWebDriver extends EventFiringWebDriver {
 		});
 	}
 
-	public SharedWebDriver() {
-		super(driver);
+	public static void launchBrowser()
+	{
+		System.setProperty("webdriver.chrome.driver",
+				System.getProperty("user.dir") + "/src/test/resources/chromedriver");
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
 	}
-}
+	
+	}

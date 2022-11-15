@@ -2,15 +2,20 @@ package uk.gov.beis.digital.AcceptanceTest;
 
 import org.junit.runner.RunWith;
 
-import cucumber.api.CucumberOptions;
-import cucumber.api.junit.Cucumber;
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
+
+
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-	format = { "html:target/cucumber-reports/html", "json:target/cucumber-reports/cucumber.json" },
-	features = { "src/test/resources/Features" },
-	tags = { "@regression","~@ignore,@Pending" },
-	glue="uk.gov.beis.digital.stepdefs"
-)
+		
+		
+		features = { "src/test/resources/Features" },
+		glue="uk.gov.beis.digital.stepdefs",
+		dryRun = false,
+        tags = "@fix1",
+        plugin = {"pretty","html:target/CucumberHTMLRep.html"})
+				
 public class RegressionTest {
 }

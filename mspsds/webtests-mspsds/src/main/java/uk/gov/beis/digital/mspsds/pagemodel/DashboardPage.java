@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import uk.gov.beis.digital.BasePage;
+import uk.gov.beis.digital.SharedWebdriver;
 
 import static org.junit.Assert.assertTrue;
 
@@ -15,11 +16,13 @@ public class DashboardPage extends BasePage {
 	By tab_case = By.xpath("//a[contains(.,'Cases')]");
 	By tab_product = By.xpath("//a[contains(.,'Products')]");
 	
+SharedWebdriver shrdWebdriver;
 	
-	public DashboardPage(WebDriver driver) {
-		super(driver);
-		this.driver=driver;
-		
+	public DashboardPage(SharedWebdriver shrdWebdriver)
+	{
+		super(shrdWebdriver);
+		this.shrdWebdriver = shrdWebdriver;
+		this.driver = shrdWebdriver.getDriver();
 	}
 	
  public void  verify_tabs(String tab) throws InterruptedException

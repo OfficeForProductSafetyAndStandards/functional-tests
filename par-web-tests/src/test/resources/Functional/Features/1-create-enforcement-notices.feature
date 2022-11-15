@@ -1,7 +1,36 @@
 Feature: Enforcement Officer - Enforcement Notice Process
 
+
+@enforcement @regression
+Scenario: raise a proposed enforcement on a direct partnership
+Given I login as "par_enforcement_officer@example.com"
+And I search for a partnership "Lower east side"
+And I open partnership page
+When I click send enforcement notice
+And I click continue enforcement
+Then I should be able to send a "proposed" enforcement notice
+
+@enforcement @regression
+Scenario: raise a retrospective enforcement on a direct partnership
+Given I login as "par_enforcement_officer@example.com"
+And I search for a partnership "Lower east side"
+And I open partnership page
+When I click send enforcement notice
+And I click continue enforcement
+Then I should be able to send a "retrospective" enforcement notice
+
+Scenario: respond to an enforcement- accept
+
+Scenario: respond to an enforcement - block
+
+Scenario: respond to an enforcement - refer
+
+
+
+
     @ci @enforcementnotices
     Scenario Outline: Enforcement Officer - Issue enforcement notice (direct and coordinated)
+    
 
         #LOGIN
         

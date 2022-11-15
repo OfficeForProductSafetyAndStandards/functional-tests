@@ -16,6 +16,7 @@ public class SearchPartnershipPage extends BasePage {
 	private By search_button = By.cssSelector("#edit-submit-partnership-search");
 	private By manage_authorities = By.xpath("//a[contains(text(),'Manage authorities')]");
     private By manage_organisations = By.xpath("//a[contains(text(),'Manage organisations')]");
+    private By partnership_page = By.xpath("//a[@href='/partnership/34499']");
 	
 	public SearchPartnershipPage(WebDriver driver) {
 		super(driver);
@@ -47,6 +48,11 @@ public class SearchPartnershipPage extends BasePage {
      {
     	assertTrue("Failed:"+link+"is displayed",!driver.getPageSource().contains(link));
     	 
+     }
+     
+     public void open_partnership_page()
+     {
+    	 this.click(partnership_page);
      }
 	
 }

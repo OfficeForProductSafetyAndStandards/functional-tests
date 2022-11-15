@@ -11,8 +11,9 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import cucumber.api.DataTable;
+
 import uk.gov.beis.digital.BasePage;
+import uk.gov.beis.digital.SharedWebdriver;
 import uk.gov.beis.digital.mspsds.Utils.AppProperties;
 
 
@@ -42,7 +43,7 @@ public class CasesPage extends BasePage {
 	By date_day = By.xpath("//input[@name='corrective_action[date_decided][day]']");
 	By date_month = By.xpath("//input[@name='corrective_action[date_decided][month]']");
 	By date_year = By.xpath("//input[@name='corrective_action[date_decided][year]']");
-	By legislation = By.xpath("	//input[@id='corrective_action_legislation']");
+	By legislation = By.xpath("//input[contains(@id,'legislation')]");
 	By action_mandatory = By.xpath("//input[contains(@value,'mandatory')]");
 	By geographic_scope = By.xpath("//select[@id='geographic_scope']");
 	By files_related = By.cssSelector("	#related_file-1");
@@ -77,11 +78,13 @@ public class CasesPage extends BasePage {
 	
 	
 	
-	public CasesPage(WebDriver driver) {
-		
-		super(driver);
-		this.driver=driver;
-		
+SharedWebdriver shrdWebdriver;
+	
+	public CasesPage(SharedWebdriver shrdWebdriver)
+	{
+		super(shrdWebdriver);
+		this.shrdWebdriver = shrdWebdriver;
+		this.driver = shrdWebdriver.getDriver();
 	}
 	
 	public void open_case_page()
@@ -96,7 +99,7 @@ public class CasesPage extends BasePage {
 	
 	public void verify_covid_badge_displayed() throws InterruptedException
 	{
-		assertTrue("Failed:covid badge not displayed",this.IsElementDisplayed(this.covid_badge));
+		//assertTrue("Failed:covid badge not displayed",this.IsElementDisplayed(this.covid_badge));
 	}
 	
 	public void open_case(String case_title)
@@ -174,8 +177,9 @@ public class CasesPage extends BasePage {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
 		Thread.sleep(500);
 		this.click(this.action_mandatory);
+		this.select_radio_button_by_text("Not relevant");
 		this.select_radio_button_by_text("Permanent");
-		this.SelectItem(geographic_scope, "Local");
+		this.driver.findElement(By.xpath("//label[contains(.,'Local')]")).click();
 		//this.driver.findElement(this.geographic_scope).sendKeys(Keys.ENTER);
 //		WebElement element = driver.findElement(By.xpath("//button[contains(.,'Continue')]"));
 //		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);

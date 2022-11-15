@@ -9,7 +9,11 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="number_of_responsible_person_users" elementType="Argument">
             <stringProp name="Argument.name">number_of_responsible_person_users</stringProp>
+<<<<<<< HEAD
+            <stringProp name="Argument.value">10</stringProp>
+=======
             <stringProp name="Argument.value">3</stringProp>
+>>>>>>> master
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="number_of_poison_centre_users" elementType="Argument">
@@ -19,7 +23,11 @@
           </elementProp>
           <elementProp name="number_of_uploads_per_user" elementType="Argument">
             <stringProp name="Argument.name">number_of_uploads_per_user</stringProp>
+<<<<<<< HEAD
+            <stringProp name="Argument.value">3</stringProp>
+=======
             <stringProp name="Argument.value">10</stringProp>
+>>>>>>> master
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="ramp_up_time" elementType="Argument">
@@ -46,7 +54,11 @@
           </elementProp>
           <elementProp name="number_of_uploads_per_user" elementType="Argument">
             <stringProp name="Argument.name">number_of_uploads_per_user</stringProp>
+<<<<<<< HEAD
+            <stringProp name="Argument.value">3</stringProp>
+=======
             <stringProp name="Argument.value">10</stringProp>
+>>>>>>> master
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
