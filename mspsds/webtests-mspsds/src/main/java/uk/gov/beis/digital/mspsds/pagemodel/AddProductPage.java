@@ -17,7 +17,7 @@ public class AddProductPage extends BasePage {
 	
 	
 
-	
+	By create_product_record = By.xpath("//a[contains(text(),'Create a product record')]");
 	By ts_prod_category = By.cssSelector("#category");
 	By ts_product_type = By.cssSelector("#subcategory");
 	By ts_product_name = By.cssSelector("#name");
@@ -42,19 +42,14 @@ SharedWebdriver shrdWebdriver;
 		this.shrdWebdriver = shrdWebdriver;
 		this.driver = shrdWebdriver.getDriver();
 	}
-	
-//	public AddProductPage(WebDriver driver) {
-//		
-//		super(driver);
-//		this.driver=driver;
-//	}
-//		
-
-	
+		
 public void enter_product_details(String category) throws InterruptedException
 {
-	this.type(this.ts_prod_category,category);
-	find(this.ts_prod_category).sendKeys(Keys.ENTER);
+	this.click(this.create_product_record);
+	Thread.sleep(3000);
+	this.SelectItem(this.ts_prod_category, category);
+	//this.type(this.ts_prod_category,category);
+	//find(this.ts_prod_category).sendKeys(Keys.ENTER);
 	this.type(this.ts_product_type,"Auto-test dishwasher");
 	Thread.sleep(2000);
 	this.select_radio_button_by_text("Yes");
@@ -62,14 +57,21 @@ public void enter_product_details(String category) throws InterruptedException
 	this.driver.findElement(By.name("product[has_markings]")).click();
 	this.driver.findElement(By.name("product[markings][]")).click();
 	this.select_radio_button_by_text("Exact number known");
-	this.type(this.ts_product_units, "20");
+	//this.type(this.ts_product_units, "20");
 	this.type(this.ts_product_name,"Day to night cream");
 	Thread.sleep(5000);
 	this.driver.findElement(By.name("product[when_placed_on_market]")).click();
 	this.type(this.ts_product_description,"This is a auto test product");
+	this.driver.findElement(By.xpath("//input[@name='commit']")).click();
 	
 	
 }
+
+public void verify_create_product_link() throws InterruptedException
+{
+	this.IsElementDisplayed(create_product_record);
+}
+
 
 public void select_compliance(String compliant_type) throws InterruptedException
 {

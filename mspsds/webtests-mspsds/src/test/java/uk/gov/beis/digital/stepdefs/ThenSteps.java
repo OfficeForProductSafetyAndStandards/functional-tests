@@ -16,6 +16,7 @@ import static org.junit.Assert.assertTrue;
 
 import uk.gov.beis.digital.BasePage;
 import uk.gov.beis.digital.SharedWebdriver;
+import uk.gov.beis.digital.mspsds.pagemodel.AddProductPage;
 import uk.gov.beis.digital.mspsds.pagemodel.AssigneePage;
 import uk.gov.beis.digital.mspsds.pagemodel.CasesPage;
 import uk.gov.beis.digital.mspsds.pagemodel.DashboardPage;
@@ -26,6 +27,7 @@ public class ThenSteps extends BasePage {
 	AssigneePage assignpge;
 	DashboardPage dashpge;
 	CasesPage casesPage;
+	AddProductPage prodpage;
 	
 SharedWebdriver shrdDriver;
 
@@ -36,19 +38,25 @@ public ThenSteps(SharedWebdriver driver)
 	assignpge = new AssigneePage(shrdDriver);
 	dashpge = new DashboardPage(shrdDriver);
 	casesPage = new CasesPage(shrdDriver);
+	prodpage = new AddProductPage(shrdDriver);
+	
 }
-
 
 	@Then("^I should be able to see prioritise team list under teams$")
 	public void i_should_be_able_to_see_prioritise_team_list_under_teams(DataTable arg1) throws Throwable {
 	   assignpge.click_change_owner();
 	   assignpge.verify_priority_team(arg1);
 	}
-
+	@Then("I should see the link {string}")
+	public void i_should_see_the_link(String string) throws InterruptedException {
+	   prodpage.verify_create_product_link();
+	  // prodpage.verify_element_by_text(string);
+	   Thread.sleep(2000);
+	}
+	
 	@Then("^I should see \"(.*?)\" tab$")
 	public void i_should_see_tab(String arg1) throws Throwable {
-		dashpge.verify_tabs(arg1);
-	  
+		dashpge.verify_tabs(arg1);  
 	}
 	
 
@@ -92,6 +100,14 @@ public ThenSteps(SharedWebdriver driver)
 	public void i_click_continue_on_corrective_action_confirm_page() throws Throwable {
 		casesPage.click(casesPage.corrective_action_continue);
 	}
+	
+	@Then("I should see confirmation message {string}")
+	public void i_should_see_confirmation_message(String string) {
+	    // Write code here that turns the phrase above into concrete actions
+		casesPage.verify_confirmation_panel_message(string);
+	}
+
+	
 	
 //	@After()
 //	/*

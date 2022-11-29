@@ -32,6 +32,7 @@ public class BasePage{
 	private static final int POLLING = 50;
 	By cases = By.cssSelector("#h1.govuk-heading-l");
 	By banner_message = By.xpath("//div[@class='govuk-notification-banner__content']");
+	By confirmation_panel_message = By.cssSelector(".govuk-panel__title");
     SharedWebdriver shrdDriver;
 //	protected SearchContext getSearchCtx() {
 //		return driver;
@@ -71,6 +72,10 @@ public class BasePage{
 	{
 		assertTrue("Failed: Expected notification" + message + " did not match to actual  ",find(banner_message).getText().equals(message));
 			
+	}
+	
+	public void verify_confirmation_panel_message(String message) {
+		assertTrue("Failed: Expected notification" + message + " did not match to actual  ",find(confirmation_panel_message).getText().equals(message));
 	}
 
 	public WebElement find(By locator) throws NoSuchElementException
