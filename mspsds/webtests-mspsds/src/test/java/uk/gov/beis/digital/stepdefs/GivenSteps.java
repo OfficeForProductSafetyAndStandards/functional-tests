@@ -55,9 +55,7 @@ public class GivenSteps extends BasePage {
 
 	@When("^I want to assign any case$")
 	public void i_want_to_assign_any_case() throws Throwable {
-		loginPage.open_mspsds_case("Cosmetics – burns hazard (no product specified)");
-		Thread.sleep(4000);
-
+		
 		assigneePage.click_change_owner();
 }
 
@@ -91,22 +89,22 @@ public class GivenSteps extends BasePage {
 		casesPage.click_by_text(arg1);
 	}
 
-	@After()
-	/*
-	 * Embed a screenshot in test report if test is marked as failed
-	 */
-	public void embedScreenshot(Scenario scenario) {
-		if (scenario.equals("failed:")) {
-			try {
-			//	scenario.write("Current Page URL is " + driver.getCurrentUrl());
-				// byte[] screenshot = getScreenshotAs(OutputType.BYTES);
-				byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-				//scenario.attach(screenshot, "image/png");
-			} catch (WebDriverException somePlatformsDontSupportScreenshots) {
-				System.err.println(somePlatformsDontSupportScreenshots.getMessage());
-			}
-		}
-	}
+//	@After()
+//	/*
+//	 * Embed a screenshot in test report if test is marked as failed
+//	 */
+//	public void embedScreenshot(Scenario scenario) {
+//		if (scenario.equals("failed:")) {
+//			try {
+//			//	scenario.write("Current Page URL is " + driver.getCurrentUrl());
+//				// byte[] screenshot = getScreenshotAs(OutputType.BYTES);
+//				byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+//				//scenario.attach(screenshot, "image/png");
+//			} catch (WebDriverException somePlatformsDontSupportScreenshots) {
+//				System.err.println(somePlatformsDontSupportScreenshots.getMessage());
+//			}
+//		}
+//	}
 
 
 }

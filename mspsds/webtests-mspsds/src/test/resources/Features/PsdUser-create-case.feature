@@ -3,9 +3,6 @@ Feature: PSD user
 	In order to create a case
 	I should have expected permissions
 	
-
-
-
 @new-flow @regression
 Scenario: As Trading standard user, I should see create a product record link
 Given I login as Trading standard user

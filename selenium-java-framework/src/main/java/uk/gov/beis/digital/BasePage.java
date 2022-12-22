@@ -30,7 +30,10 @@ public class BasePage{
 	private WebDriverWait wait;
 	private static final int TIMEOUT = 5;
 	private static final int POLLING = 50;
-	By cases = By.cssSelector("#h1.govuk-heading-l");
+	
+	//GDS component elements
+	
+	By page_h1 = By.cssSelector("h1.govuk-heading-l");
 	By banner_message = By.xpath("//p[@class='govuk-notification-banner__heading']");
 	By confirmation_panel_message = By.cssSelector(".govuk-panel__title");
     SharedWebdriver shrdDriver;
@@ -224,15 +227,6 @@ public class BasePage{
 		this.IsElementDisplayed(confirmation_panel_message);
 		assertTrue("Failed: Expected notification" + message + " did not match to actual  ",find(confirmation_panel_message).getText().equals(message));
 	}
-
-	
-
-	public void open_mspsds_case(String title)
-	{
-		driver.findElement(By.linkText(title)).click();
-	    // this.waitForElementToLoad(cases);
-	}
-	
 	
 	
 	public Boolean verify_elements_text(String text, By locator) throws InterruptedException
@@ -496,11 +490,11 @@ public class BasePage{
 	 * This method is to return h1 on any given page
 	 * To Valiate with expected h1 and ensure it is correct page
 	 */
-	public String read_page_h1(By locator) throws InterruptedException
+	public void verify_page_h1(String h1) throws InterruptedException
 	{
-		String actual_h1;
-		this.IsElementDisplayed(locator);
-		return actual_h1 =driver.findElement(locator).getText();
+		this.IsElementDisplayed(page_h1);
+		String actual_h1 = driver.findElement(page_h1).getText();
+		assertTrue("Failed:"+ actual_h1+" doesn't match expected " + h1, (actual_h1).equalsIgnoreCase(h1));
 	}
 	
 }

@@ -88,7 +88,7 @@ public ThenSteps(SharedWebdriver driver)
 	@Then("^I should see page \"(.*?)\"$")
 	public void i_should_see_page(String arg1) throws Throwable {
 		Thread.sleep(2000);
-		casesPage.verify_on_correct_page(arg1); 
+		casesPage.verify_page_h1(arg1);
 	}
 	
 	@Then("^I should see covid badge displayed on the case overview page$")
@@ -130,21 +130,21 @@ public ThenSteps(SharedWebdriver driver)
 
 	
 	
-	@After()
-	/*
-	 * Embed a screenshot in test report if test is marked as failed
-	 */
-	public void embedScreenshot(Scenario scenario) {
-		if (scenario.equals("failed:")) {
-			try {
-			//	scenario.write("Current Page URL is " + driver.getCurrentUrl());
-				// byte[] screenshot = getScreenshotAs(OutputType.BYTES);
-				byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-				//scenario.attach(screenshot, "image/png");
-			} catch (WebDriverException somePlatformsDontSupportScreenshots) {
-				System.err.println(somePlatformsDontSupportScreenshots.getMessage());
-			}
-		}
-	}
-	
+//	@After()
+//	/*
+//	 * Embed a screenshot in test report if test is marked as failed
+//	 */
+//	public void embedScreenshot(Scenario scenario) {
+//		if (scenario.equals("failed:")) {
+//			try {
+//			//	scenario.write("Current Page URL is " + driver.getCurrentUrl());
+//				// byte[] screenshot = getScreenshotAs(OutputType.BYTES);
+//				byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+//				//scenario.attach(screenshot, "image/png");
+//			} catch (WebDriverException somePlatformsDontSupportScreenshots) {
+//				System.err.println(somePlatformsDontSupportScreenshots.getMessage());
+//			}
+//		}
+//	}
+//	
 }
