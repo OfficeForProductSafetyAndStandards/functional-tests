@@ -72,6 +72,10 @@ public void verify_create_product_link() throws InterruptedException
 	this.IsElementDisplayed(create_product_record);
 }
 
+public void open_products_page(String page)
+{
+	this.driver.findElement(By.xpath("//a[normalize-space()='"+ page +"']")).click();
+}
 
 public void select_compliance(String compliant_type) throws InterruptedException
 {

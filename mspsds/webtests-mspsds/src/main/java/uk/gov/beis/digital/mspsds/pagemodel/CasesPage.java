@@ -27,10 +27,19 @@ public class CasesPage extends BasePage {
 	By cont_email = By.xpath("//input[@id='complainant_email_address'])");
 	By Continue = By.xpath("//input[@value='Continue']");
 	
+	//Case summary page elements
+	By keyvalue = By.cssSelector("dd[class='govuk-summary-list__value'] p");
+	By summary_list = By.xpath("//dl[@class='govuk-summary-list']");
+	
+	
 	// Allegation details Page Elements
+	By product_reason_unsafe= By.xpath("//label[@for='reported_reason']");
+	By product_reaso_noncompliant = By.xpath("//label[@for='investigation_reported_reason_non_compliant']");
 	By AllegationDetail = By.xpath("//textarea[@id='allegation_description']");
 	By Prod_Category = By.cssSelector("#allegation_product_category");
 	By Hazard_type = By.cssSelector("#allegation_hazard_type");
+	By hazard_type = By.cssSelector("#hazard_type");
+	By save_case = By.cssSelector("input[value='Save']");
 	By create_allegation = By.xpath("//input[@value='Create allegation']");
 	By ts_case_page = By.xpath("//h1[contains(@class,'govuk-heading-l')]");
 	By ts_activity = By.xpath("//a[@id='Activity_id']");
@@ -92,6 +101,7 @@ SharedWebdriver shrdWebdriver;
 	this.got_to(env+"casses");
 	}
 	
+	
 	public void verify_on_correct_page(String page_name)
 	{
 		assertTrue("Failed:not on the correct page",find(this.ts_case_page).getText().contains(page_name));
@@ -105,6 +115,23 @@ SharedWebdriver shrdWebdriver;
 	public void open_case(String case_title)
 	{
 		this.open_case(case_title);
+	}
+	public void verify_text_summary_page(String text) throws InterruptedException
+	{
+	    assertTrue("Failed: Element not displayed",this.IsElementDisplayed(keyvalue));
+		assertTrue("Failed:"+ text + "Not displayed on the summary page",this.driver.findElement(By.xpath("//p[normalize-space()='"+ text+"']")).getText().equalsIgnoreCase(text));
+	}
+	
+	public void verify_summary_page_element_text(String text) throws InterruptedException
+	{
+		assertTrue("Failed:" + text +" Not displayed", this.verify_elements_text(text,this.keyvalue));
+	}
+	
+	// new flow - enter test case name 
+	public void enter_case_name(String name)
+	{
+		this.driver.findElement(By.cssSelector("#user_title")).sendKeys(name + this.generate_string(8));
+		this.driver.findElement(save_case).click();
 	}
 	
 	public void enter_contact_details()
@@ -138,8 +165,15 @@ SharedWebdriver shrdWebdriver;
 		this.click_by_text("All cases");
 		this.click_by_text(case_title);
 	}
+	//new case flow journey
 	
+	public void select_hazard(String hazard)
+	{
+	this.SelectItem(hazard_type, hazard);
+	this.driver.findElement(By.cssSelector("#hazard_description")).sendKeys("Auto test - hazard description");
+	}
 	
+		
 	public void select_hazard_type(String type) throws InterruptedException{
 		this.type(Hazard_type,type);
 		driver.findElement(By.cssSelector("#allegation_hazard_type")).sendKeys(Keys.RETURN);
@@ -233,6 +267,11 @@ SharedWebdriver shrdWebdriver;
 	public void verify_error(String error)
 	{
 		assertTrue("Failed:error not shown",this.driver.findElement(By.xpath("//a[contains(text(),'"+error+"')]")).getText().contains(error));
+	}
+	
+	public void read_summary_elements()
+	{
+		this.return_summary_elements(summary_list);
 	}
 	
 }

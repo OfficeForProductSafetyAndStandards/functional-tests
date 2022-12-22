@@ -51,7 +51,7 @@ public ThenSteps(SharedWebdriver driver)
 	public void i_should_see_the_link(String string) throws InterruptedException {
 	   prodpage.verify_create_product_link();
 	  // prodpage.verify_element_by_text(string);
-	   Thread.sleep(2000);
+	 
 	}
 	
 	@Then("^I should see \"(.*?)\" tab$")
@@ -106,6 +106,27 @@ public ThenSteps(SharedWebdriver driver)
 	    // Write code here that turns the phrase above into concrete actions
 		casesPage.verify_confirmation_panel_message(string);
 	}
+
+	@Then("I see link {string}")
+	public void i_see_link(String string) throws InterruptedException {
+		casesPage.verify_element_by_text(string);
+		casesPage.click_by_text(string);
+		
+	}
+	@Then("I should see on the summary page {string}")
+	public void i_should_see_on_the_summary_page(String string) throws InterruptedException {
+		Thread.sleep(1000);
+		//casesPage.verify_text_summary_page(string);
+		casesPage.verify_summary_page_element_text(string);
+	    
+	}
+
+	
+	@Then("I should be able validate case summary info")
+	public void i_should_be_able_validate_case_summary_info() {
+		casesPage.read_summary_elements();
+	}
+
 
 	
 	

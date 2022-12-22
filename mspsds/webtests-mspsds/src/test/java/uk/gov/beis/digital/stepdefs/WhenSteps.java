@@ -108,6 +108,12 @@ public class WhenSteps extends BasePage {
 	   
 	}
 	
+	@When("I open the product {string}")
+	public void i_open_the_product(String string) {
+		casepge.click_by_text(string);
+	}
+
+	
 
 	@When("^I enter allegation details for product category \"(.*?)\"$")
 	public void i_enter_allegation_details_for_product_category(String arg1) throws Throwable {
@@ -136,6 +142,33 @@ public class WhenSteps extends BasePage {
 	public void i_click_save() throws Throwable {
 		this.driver.findElement(By.xpath("//div[@class='col-md-10 col-md-offset-2']//button[@class='ng-binding btn btn-primary'][contains(text(),'Save')]")).click();
 	    Thread.sleep(3000);   
+	}
+
+	
+	@When("I select hazard {string}")
+	public void i_select_hazard(String string) {
+		casepge.select_hazard(string);
+	}
+	
+	@When("I enter details why unsafe")
+	public void i_enter_details_why_unsafe() {
+	    
+	}
+	@When("I enter reference number")
+	public void i_enter_reference_number() {
+		casepge.select_radio_button_by_text("Yes");
+		
+	    
+	}
+	@When("I enter case name {string}")
+	public void i_enter_case_name(String string) {
+		casepge.enter_case_name(string);
+	
+	}
+	@Then("I should see success banner {string}")
+	public void i_should_see_success_banner(String string) {
+		
+	  
 	}
 
 	@Then("^I should be able to add to Lincolnshire County Council$")
@@ -442,6 +475,11 @@ public void i_enter_project_summary() throws Throwable {
 @When("^I click create project$")
 public void i_click_create_project() throws Throwable {
    
+}
+
+@When("I go to {string}")
+public void i_go_to(String string) {
+	addProductPage.open_products_page(string);
 }
 
 //	

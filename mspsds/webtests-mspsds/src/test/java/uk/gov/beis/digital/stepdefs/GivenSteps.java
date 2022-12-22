@@ -37,6 +37,7 @@ public class GivenSteps extends BasePage {
 		shrdDriver=driver;
 		//this.driver= basepge.getDriver();
 		loginPage = new LoginPage(shrdDriver);
+		casesPage = new CasesPage(shrdDriver);
 	}
 
 	@Given("^I login as OPSS user$")
