@@ -32,7 +32,7 @@ And I click "Create product record"
 And I enter product details for product category "Personal protective equipment (PPE)"
 Then I should see confirmation message "Product record created"
 
- @regression @new_case_flow
+@regression @new_case_flow
 Scenario: Create a new case from product page
 Given I login as Trading standard user
 When I click on "Products" tab
@@ -57,7 +57,7 @@ Then I should see confirmation message "Case created"
 When I click link "View the case"
 Then I should see on the summary page "Product reported as unsafe"
 
-
+@regression
 Scenario: create a safe and compliant case
 Given I login as Trading standard user
 When I click on "Products" tab

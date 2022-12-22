@@ -31,7 +31,7 @@ public class BasePage{
 	private static final int TIMEOUT = 5;
 	private static final int POLLING = 50;
 	By cases = By.cssSelector("#h1.govuk-heading-l");
-	By banner_message = By.xpath("//div[@class='govuk-notification-banner__content']");
+	By banner_message = By.xpath("//p[@class='govuk-notification-banner__heading']");
 	By confirmation_panel_message = By.cssSelector(".govuk-panel__title");
     SharedWebdriver shrdDriver;
 //	protected SearchContext getSearchCtx() {
@@ -45,6 +45,10 @@ public class BasePage{
 		this.shrdDriver=shrdDriver;
 		this.driver= shrdDriver.getDriver();
 	}
+	
+	/* Test Framework related re-usable methods
+	 * These are used across any gov services which is following gds design pattern
+	 */
 
 	public void launch_app(String url) throws InterruptedException {
 
@@ -58,41 +62,36 @@ public class BasePage{
 		return  generated_string=RandomStringUtils.randomAlphanumeric(len).toLowerCase();
 	}
 	
+	/*
+	 * this method is return WebDriver class FindElement(by locator)
+	 */
+	public WebElement find(By locator) throws NoSuchElementException
+	{
+		return driver.findElement(locator);
+	}
+	
+	/*
+	 * this method is used when there's more than one element from a locator
+	 */
+	public List<WebElement> findelements(By locator) {
+		return driver.findElements(locator);
+	}
+	
+	
+	/*
+	 * this method is navigate to any given url
+	 */
 	
 	public void got_to(String page_url)
 	{
 		driver.navigate().to(page_url);
 	}
 
+	
 	protected void waitForElementToLoad(By locator) {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 	}
 	
-	public void verify_banner_message(String message)
-	{
-		assertTrue("Failed: Expected notification" + message + " did not match to actual  ",find(banner_message).getText().equals(message));
-			
-	}
-	
-	public void verify_confirmation_panel_message(String message) {
-		assertTrue("Failed: Expected notification" + message + " did not match to actual  ",find(confirmation_panel_message).getText().equals(message));
-	}
-
-	public WebElement find(By locator) throws NoSuchElementException
-	{
-		return driver.findElement(locator);
-	}
-
-	public void open_mspsds_case(String title)
-	{
-		driver.findElement(By.linkText(title)).click();
-	    // this.waitForElementToLoad(cases);
-	}
-	
-	public List<WebElement> findelements(By locator) {
-		return driver.findElements(locator);
-	}
-
 	public void click(By locator) {
 		find(locator).click();
 	}
@@ -141,15 +140,9 @@ public class BasePage{
 			e1.printStackTrace();
 		}
 	}
-
-	public void verifyPageTitle(String title) {
-		assertTrue("Failed: Expected Page " + title + " did not match to actual  " + driver.getTitle() + "",
-				driver.getTitle().equals(title));
-
-	}
-
+	
 	public boolean IsElementPresent(By locator) {
-		return findelements(locator).size() > 0;
+	return findelements(locator).size() > 0;
 	}
 
 	public boolean IsElementDisplayed(By locator) throws InterruptedException {
@@ -162,7 +155,7 @@ public class BasePage{
 
 		if (element.isDisplayed()) {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("arguments[0].style.border='3px solid blue'", element);
+			js.executeScript("arguments[0].style.border='3px solid green'", element);
 			Thread.sleep(2000);
 
 			return true;
@@ -188,10 +181,11 @@ public class BasePage{
 		return flag;
 	}
 	
- /**
-  * @param text
-  * @return
-  */
+/**********
+ * 
+ * @param title
+ * @return boolean
+ */
 	
    public boolean verify_page_header1(String title)
    {
@@ -204,6 +198,81 @@ public class BasePage{
 			return flag=false;
 		}
    }
+	
+	/************************* Service specific methods************************/
+	
+	
+	/**************
+	 * 
+	 * @param message
+	 * @throws InterruptedException
+	 */
+	
+	public void verify_banner_message(String message) throws InterruptedException
+	{
+		this.IsElementDisplayed(banner_message);
+		assertTrue("Failed: Expected sucess" + message + " did not match to actual  ",find(banner_message).getText().equals(message));
+			
+	}
+	
+	/*******
+	 * 
+	 * @param message
+	 * @throws InterruptedException
+	 */
+	public void verify_confirmation_panel_message(String message) throws InterruptedException {
+		this.IsElementDisplayed(confirmation_panel_message);
+		assertTrue("Failed: Expected notification" + message + " did not match to actual  ",find(confirmation_panel_message).getText().equals(message));
+	}
+
+	
+
+	public void open_mspsds_case(String title)
+	{
+		driver.findElement(By.linkText(title)).click();
+	    // this.waitForElementToLoad(cases);
+	}
+	
+	
+	
+	public Boolean verify_elements_text(String text, By locator) throws InterruptedException
+	{
+		boolean flag=false;
+		List<WebElement> elements = this.findelements(locator);
+		for(WebElement element: elements)
+		{
+			System.out.println(element.getText());
+			if(element.getText().equalsIgnoreCase(text))
+			{
+			
+				if(element.isDisplayed()) {
+					JavascriptExecutor js = (JavascriptExecutor) driver;
+					js.executeScript("arguments[0].style.border='3px solid blue'", element);
+					Thread.sleep(2000);
+				}
+					
+			
+			return flag=true;
+		
+			}
+		}
+		
+		return flag;
+	}
+
+	
+
+	public void verifyPageTitle(String title) {
+		assertTrue("Failed: Expected Page " + title + " did not match to actual  " + driver.getTitle() + "",
+				driver.getTitle().equals(title));
+
+	}
+	
+	
+	
+
+	
+	
    
    
    public boolean verify_par_page_header1(String title)
@@ -344,7 +413,7 @@ public class BasePage{
 	
 	public void click_continue_button()
 	{
-		driver.findElement(By.xpath("//button[contains(.,'Continue')]")).click();
+		driver.findElement(By.xpath("//input[@name='commit']")).click();
 	}
 	
 	public void click_continue_enforcement() throws InterruptedException
@@ -379,6 +448,11 @@ public class BasePage{
 		}
 	}
 
+	/*
+	 * This method is used to upload a file on a given page
+	 * Use this method across any page class where it is needed
+	 */
+	
 	public void file_upload(By locator, String file) {
 		String testFile;
 		testFile = System.getProperty("properties",
@@ -395,4 +469,38 @@ public class BasePage{
 		Thread.sleep(3000);
 	}
 
+	public void return_summary_elements(By locator)
+	{
+		List<WebElement> summary_list = this.driver.findElements(locator);
+		for (WebElement element: summary_list)
+		{
+			System.out.println("test");
+			
+		}		
+		
+	}
+	
+	/*
+	 * This method is to actual validation error on the page
+	 * To validate with expected error message. Use within page pagebjects
+	 */
+	public String read_error_summary(By locator)
+	{
+		
+	String actual_error; 
+		return actual_error = driver.findElement(locator).getText();
+		
+	}
+	
+	/*
+	 * This method is to return h1 on any given page
+	 * To Valiate with expected h1 and ensure it is correct page
+	 */
+	public String read_page_h1(By locator) throws InterruptedException
+	{
+		String actual_h1;
+		this.IsElementDisplayed(locator);
+		return actual_h1 =driver.findElement(locator).getText();
+	}
+	
 }

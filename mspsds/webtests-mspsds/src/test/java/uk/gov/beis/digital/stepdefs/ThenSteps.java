@@ -102,7 +102,7 @@ public ThenSteps(SharedWebdriver driver)
 	}
 	
 	@Then("I should see confirmation message {string}")
-	public void i_should_see_confirmation_message(String string) {
+	public void i_should_see_confirmation_message(String string) throws InterruptedException {
 	    // Write code here that turns the phrase above into concrete actions
 		casesPage.verify_confirmation_panel_message(string);
 	}
@@ -130,21 +130,21 @@ public ThenSteps(SharedWebdriver driver)
 
 	
 	
-//	@After()
-//	/*
-//	 * Embed a screenshot in test report if test is marked as failed
-//	 */
-//	public void embedScreenshot(Scenario scenario) {
-//		if (scenario.equals("failed:")) {
-//			try {
-//			//	scenario.write("Current Page URL is " + driver.getCurrentUrl());
-//				// byte[] screenshot = getScreenshotAs(OutputType.BYTES);
-//				byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-//				//scenario.attach(screenshot, "image/png");
-//			} catch (WebDriverException somePlatformsDontSupportScreenshots) {
-//				System.err.println(somePlatformsDontSupportScreenshots.getMessage());
-//			}
-//		}
-//	}
+	@After()
+	/*
+	 * Embed a screenshot in test report if test is marked as failed
+	 */
+	public void embedScreenshot(Scenario scenario) {
+		if (scenario.equals("failed:")) {
+			try {
+			//	scenario.write("Current Page URL is " + driver.getCurrentUrl());
+				// byte[] screenshot = getScreenshotAs(OutputType.BYTES);
+				byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+				//scenario.attach(screenshot, "image/png");
+			} catch (WebDriverException somePlatformsDontSupportScreenshots) {
+				System.err.println(somePlatformsDontSupportScreenshots.getMessage());
+			}
+		}
+	}
 	
 }

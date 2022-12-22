@@ -14,7 +14,7 @@ import io.cucumber.junit.CucumberOptions;
 		features = { "src/test/resources/Features" },
 		glue="uk.gov.beis.digital.stepdefs",
 		dryRun = false,
-        tags = "@read-summary",
+        tags = "@regression",
         plugin = {"pretty","html:target/CucumberHTMLRep.html"})
 				
 public class RegressionTest {
