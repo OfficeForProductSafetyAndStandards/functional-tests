@@ -220,9 +220,8 @@ Scenario: Add test results via activity
 Scenario: test summary
 Given I login as Trading standard user
 And I open case "Auto test487221"
-Then I should be able validate case summary info
-
-
-
+Then I should see on the summary page "Auto test487221"
+And I should see case owner "Nasir Khan - Southampton Council"
+And I should see case reference "86868 Trading standards reference"
 
 

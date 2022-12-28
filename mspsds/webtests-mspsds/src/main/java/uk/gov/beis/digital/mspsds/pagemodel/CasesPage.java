@@ -28,7 +28,7 @@ public class CasesPage extends BasePage {
 	By Continue = By.xpath("//input[@value='Continue']");
 	
 	//Case summary page elements
-	By keyvalue = By.cssSelector("dd[class='govuk-summary-list__value'] p");
+	By keyvalue = By.cssSelector("dd[class='govuk-summary-list__value']");
 	By summary_list = By.xpath("//dl[@class='govuk-summary-list']");
 	
 	
@@ -269,9 +269,9 @@ SharedWebdriver shrdWebdriver;
 		assertTrue("Failed:error not shown",this.driver.findElement(By.xpath("//a[contains(text(),'"+error+"')]")).getText().contains(error));
 	}
 	
-	public void read_summary_elements()
+	public void read_summary_element_value(String string)
 	{
-		this.return_summary_elements(summary_list);
+		assertTrue("Failed,expected value is not displayed",this.find_summary_element_value(string));
 	}
 	
 }

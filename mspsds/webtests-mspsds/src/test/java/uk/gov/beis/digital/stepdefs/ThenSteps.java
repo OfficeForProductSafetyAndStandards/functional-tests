@@ -121,12 +121,16 @@ public ThenSteps(SharedWebdriver driver)
 	    
 	}
 
-	
-	@Then("I should be able validate case summary info")
-	public void i_should_be_able_validate_case_summary_info() {
-		casesPage.read_summary_elements();
+	@Then("I should see case owner {string}")
+	public void i_should_see_case_owner(String string) throws InterruptedException {
+	    // Write code here that turns the phrase above into concrete actions
+		casesPage.verify_summary_page_element_text(string);
 	}
-
+	@Then("I should see case reference {string}")
+	public void i_should_see_case_reference(String string) throws InterruptedException {
+	    // Write code here that turns the phrase above into concrete actions
+		casesPage.verify_summary_page_element_text(string);
+	}
 
 	
 	
