@@ -18,6 +18,7 @@ public class AddProductPage extends BasePage {
 	
 
 	By create_product_record = By.xpath("//a[contains(text(),'Create a product record')]");
+	By prodid_search_field = By.cssSelector("#reference");
 	By ts_prod_category = By.cssSelector("#category");
 	By ts_product_type = By.cssSelector("#subcategory");
 	By ts_product_name = By.cssSelector("#name");
@@ -113,6 +114,12 @@ public void create_case() throws InterruptedException
 {
 	this.click(this.ts_create_case);
 	Thread.sleep(1000);
+}
+
+public void enter_prod_id(String id)
+{
+	this.type(prodid_search_field, id);
+	
 }
 
 	}

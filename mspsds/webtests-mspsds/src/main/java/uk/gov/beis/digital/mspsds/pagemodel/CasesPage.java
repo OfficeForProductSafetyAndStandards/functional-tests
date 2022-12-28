@@ -11,12 +11,9 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-
 import uk.gov.beis.digital.BasePage;
 import uk.gov.beis.digital.SharedWebdriver;
 import uk.gov.beis.digital.mspsds.Utils.AppProperties;
-
-
 
 public class CasesPage extends BasePage {
 	String env = AppProperties.get("envurl");
@@ -26,14 +23,13 @@ public class CasesPage extends BasePage {
 	By cont_phone = By.xpath("//input[@id='complainant_phone_number']");
 	By cont_email = By.xpath("//input[@id='complainant_email_address'])");
 	By Continue = By.xpath("//input[@value='Continue']");
-	
-	//Case summary page elements
+
+	// Case summary page elements
 	By keyvalue = By.cssSelector("dd[class='govuk-summary-list__value']");
 	By summary_list = By.xpath("//dl[@class='govuk-summary-list']");
-	
-	
+
 	// Allegation details Page Elements
-	By product_reason_unsafe= By.xpath("//label[@for='reported_reason']");
+	By product_reason_unsafe = By.xpath("//label[@for='reported_reason']");
 	By product_reaso_noncompliant = By.xpath("//label[@for='investigation_reported_reason_non_compliant']");
 	By AllegationDetail = By.xpath("//textarea[@id='allegation_description']");
 	By Prod_Category = By.cssSelector("#allegation_product_category");
@@ -48,7 +44,7 @@ public class CasesPage extends BasePage {
 	By case_comment = By.xpath("//textarea[@class='govuk-textarea ']");
 	By corrective_summary = By.cssSelector("#corrective_action_summary");
 	public By corrective_action_continue = By.xpath("//button[contains(.,'Continue')]");
-	
+
 	By date_day = By.xpath("//input[@name='corrective_action[date_decided][day]']");
 	By date_month = By.xpath("//input[@name='corrective_action[date_decided][month]']");
 	By date_year = By.xpath("//input[@name='corrective_action[date_decided][year]']");
@@ -56,22 +52,21 @@ public class CasesPage extends BasePage {
 	By action_mandatory = By.xpath("//input[contains(@value,'mandatory')]");
 	By geographic_scope = By.xpath("//select[@id='geographic_scope']");
 	By files_related = By.cssSelector("	#related_file-1");
-	
-	//Enquiry page elements
+
+	// Enquiry page elements
 	By enquiry_date_day = By.xpath("//input[@name='enquiry[date_received][day]']");
 	By enquiry_date_month = By.xpath("//input[@name='enquiry[date_received][month]']");
 	By enquiry_date_year = By.xpath("//input[@name='enquiry[date_received][year]']");
 	By enquiry_complainant_name = By.xpath("//input[contains(@name,'complainant[name]')]");
-	By enquiry_description =  By.xpath("//textarea[contains(@id,'enquiry_description')]");
+	By enquiry_description = By.xpath("//textarea[contains(@id,'enquiry_description')]");
 	public By enquiry_title = By.xpath("//input[contains(@id,'enquiry_user_title')]");
 	public By submit = By.xpath("//button[contains(@class,'govuk-button ')]");
-	
-	//Project page elements
+
+	// Project page elements
 	public By project_title = By.xpath("//input[contains(@id,'investigation_user_title')]");
 	public By project_summary = By.xpath("//textarea[contains(@id,'investigation_description')]");
 
-	
-	//Attachment page objects
+	// Attachment page objects
 	public By supporting_information = By.xpath("//a[@id='Supporting information_id']");
 	public By attachment_title = By.xpath("//input[contains(@id,'document_file_title')]");
 	public By file_upload = By.xpath("//input[contains(@name,'document[file][file]')]");
@@ -79,133 +74,119 @@ public class CasesPage extends BasePage {
 	public By cancel_link = By.xpath("//a[contains(.,'Cancel')]");
 	public By file_upload_submit = By.xpath("//button[@class='govuk-button '][contains(.,'Upload')]");
 	public By corrective_action_file = By.xpath("//input[contains(@class,'govuk-file-upload')]");
-	//covid badge element
+	// covid badge element
 	public By covid_badge = By.xpath("//span[contains(.,'COVID-19 related case')]");
-	
-	//summary error 
+
+	// summary error
 	public By page_error = By.xpath("//a[contains(text(),'Enter title')]");
-	
-	
-	
-SharedWebdriver shrdWebdriver;
-	
-	public CasesPage(SharedWebdriver shrdWebdriver)
-	{
+
+	SharedWebdriver shrdWebdriver;
+
+	public CasesPage(SharedWebdriver shrdWebdriver) {
 		super(shrdWebdriver);
 		this.shrdWebdriver = shrdWebdriver;
 		this.driver = shrdWebdriver.getDriver();
 	}
-	
-	public void open_case_page()
-	{
-	this.got_to(env+"casses");
+
+	public void open_case_page() {
+		this.got_to(env + "casses");
 	}
-	
-	
-	public void verify_on_correct_page(String page_name)
-	{
-		assertTrue("Failed:not on the correct page",find(this.ts_case_page).getText().contains(page_name));
+
+	public void verify_on_correct_page(String page_name) {
+		assertTrue("Failed:not on the correct page", find(this.ts_case_page).getText().contains(page_name));
 	}
-	
-	public void verify_covid_badge_displayed() throws InterruptedException
-	{
-		//assertTrue("Failed:covid badge not displayed",this.IsElementDisplayed(this.covid_badge));
+
+	public void verify_covid_badge_displayed() throws InterruptedException {
+		// assertTrue("Failed:covid badge not
+		// displayed",this.IsElementDisplayed(this.covid_badge));
 	}
-	
-	public void open_case(String case_title)
-	{
+
+	public void open_case(String case_title) {
 		this.open_case(case_title);
 	}
-	public void verify_text_summary_page(String text) throws InterruptedException
-	{
-	    assertTrue("Failed: Element not displayed",this.IsElementDisplayed(keyvalue));
-		assertTrue("Failed:"+ text + "Not displayed on the summary page",this.driver.findElement(By.xpath("//p[normalize-space()='"+ text+"']")).getText().equalsIgnoreCase(text));
+
+	public void verify_text_summary_page(String text) throws InterruptedException {
+		assertTrue("Failed: Element not displayed", this.IsElementDisplayed(keyvalue));
+		assertTrue("Failed:" + text + "Not displayed on the summary page", this.driver
+				.findElement(By.xpath("//p[normalize-space()='" + text + "']")).getText().equalsIgnoreCase(text));
 	}
-	
-	public void verify_summary_page_element_text(String text) throws InterruptedException
-	{
-		assertTrue("Failed:" + text +" Not displayed", this.verify_elements_text(text,this.keyvalue));
+
+	public void verify_summary_page_element_text(String text) throws InterruptedException {
+		assertTrue("Failed:" + text + " Not displayed", this.verify_elements_text(text, this.keyvalue));
 	}
-	
-	// new flow - enter test case name 
-	public void enter_case_name(String name)
-	{
+
+	// new flow - enter test case name
+	public void enter_case_name(String name) {
 		this.driver.findElement(By.cssSelector("#user_title")).sendKeys(name + this.generate_string(8));
 		this.driver.findElement(save_case).click();
 	}
-	
-	public void enter_contact_details()
-	{
+
+	public void enter_contact_details() {
 		this.type(cont_name, "AutoTest-Nasir");
 		this.click(Continue);
 	}
-	public void enter_allegation_details(String prod_cat,String hazard_type) throws InterruptedException
-	{
+
+	public void enter_allegation_details(String prod_cat, String hazard_type) throws InterruptedException {
 		this.type(AllegationDetail, "Auto-Test-allegation");
-		this.type(Prod_Category,"Baby/Children's Products");
+		this.type(Prod_Category, "Baby/Children's Products");
 		driver.findElement(By.cssSelector("#allegation_product_category")).sendKeys(Keys.RETURN);
-		
+
 		Thread.sleep(2000);
-		this.type(Hazard_type,"Asphyxiation");
+		this.type(Hazard_type, "Asphyxiation");
 		driver.findElement(By.cssSelector("#allegation_hazard_type")).sendKeys(Keys.RETURN);
 		this.click(create_allegation);
 		Thread.sleep(3000);
 	}
-	
-	public void select_allegation_prod_cat(String category) throws InterruptedException{
+
+	public void select_allegation_prod_cat(String category) throws InterruptedException {
 		this.type(AllegationDetail, "Auto-Test-allegation");
-		this.type(Prod_Category,category);
+		this.type(Prod_Category, category);
 		driver.findElement(By.cssSelector("#allegation_product_category")).sendKeys(Keys.RETURN);
 		Thread.sleep(2000);
-		
+
 	}
-	
-	public void open_a_case(String case_title)
-	{
+
+	public void open_a_case(String case_title) {
 		this.click_by_text("All cases");
 		this.click_by_text(case_title);
 	}
-	//new case flow journey
-	
-	public void select_hazard(String hazard)
-	{
-	this.SelectItem(hazard_type, hazard);
-	this.driver.findElement(By.cssSelector("#hazard_description")).sendKeys("Auto test - hazard description");
+	// new case flow journey
+
+	public void select_hazard(String hazard) {
+		this.SelectItem(hazard_type, hazard);
+		this.driver.findElement(By.cssSelector("#hazard_description")).sendKeys("Auto test - hazard description");
 	}
-	
-		
-	public void select_hazard_type(String type) throws InterruptedException{
-		this.type(Hazard_type,type);
+
+	public void select_hazard_type(String type) throws InterruptedException {
+		this.type(Hazard_type, type);
 		driver.findElement(By.cssSelector("#allegation_hazard_type")).sendKeys(Keys.RETURN);
 		Thread.sleep(2000);
 		this.click(create_allegation);
-		
+
 	}
-	
-	public void add_comment_activity() throws InterruptedException
-	{
+
+	public void add_comment_activity() throws InterruptedException {
 		this.click(this.ts_activity);
 		this.click_by_text("Add comment");
-		this.type(this.case_comment,"Automated test-comment1");
+		this.type(this.case_comment, "Automated test-comment1");
 		this.click_continue_input();
 		Thread.sleep(2000);
-		this.verify_banner_message("Comment was successfully added.");	
-		
+		this.verify_banner_message("Comment was successfully added.");
+
 	}
-	
-	public void add_corrective_action(String file_flag) throws InterruptedException
-	{
-		
+
+	public void add_corrective_action(String file_flag) throws InterruptedException {
+
 		this.click_by_text("Add supporting information");
 		this.select_radio_button_by_text("Corrective action");
 		this.click_continue_button();
 		this.select_radio_button_by_text("Import rejected at border");
-		//this.type(this.corrective_summary,"Auto test corrective action");
-		//this.driver.findElement(this.date_day).sendKeys("12");
-		this.type(this.date_day,"12");
-		this.type(this.date_month,"12");
-		this.type(this.date_year,"2019");
-		this.type(this.legislation,"Aerosol Dispensers Regulations 2009");
+		// this.type(this.corrective_summary,"Auto test corrective action");
+		// this.driver.findElement(this.date_day).sendKeys("12");
+		this.type(this.date_day, "12");
+		this.type(this.date_month, "12");
+		this.type(this.date_year, "2019");
+		this.type(this.legislation, "Aerosol Dispensers Regulations 2009");
 		this.driver.findElement(this.legislation).sendKeys(Keys.ENTER);
 		WebElement element = driver.findElement(By.xpath("//input[contains(@value,'mandatory')]"));
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
@@ -214,64 +195,82 @@ SharedWebdriver shrdWebdriver;
 		this.select_radio_button_by_text("Not relevant");
 		this.select_radio_button_by_text("Permanent");
 		this.driver.findElement(By.xpath("//label[contains(.,'Local')]")).click();
-		//this.driver.findElement(this.geographic_scope).sendKeys(Keys.ENTER);
+		// this.driver.findElement(this.geographic_scope).sendKeys(Keys.ENTER);
 //		WebElement element = driver.findElement(By.xpath("//button[contains(.,'Continue')]"));
 //		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
 //		Thread.sleep(500);
-		if(file_flag.equalsIgnoreCase("yes"))
-		{
+		if (file_flag.equalsIgnoreCase("yes")) {
 			this.driver.findElement(By.cssSelector("#related_file")).click();
 			this.add_corrective_action_file();
 		}
-		
-		else
-		{
-		this.click(this.files_related);
+
+		else {
+			this.click(this.files_related);
 		}
 		this.driver.findElement(By.xpath("//button[contains(.,'Continue')]")).click();
-		//this.click_continue();
+		// this.click_continue();
 		Thread.sleep(2000);
 	}
-	
-	public void enter_date_enquiry_form()
-	{
-		this.type(this.enquiry_date_day,"12");
-		this.type(this.enquiry_date_month,"12");
-		this.type(this.enquiry_date_year,"2019");
+
+	public void enter_date_enquiry_form() {
+		this.type(this.enquiry_date_day, "12");
+		this.type(this.enquiry_date_month, "12");
+		this.type(this.enquiry_date_year, "2019");
 	}
-	public void enter_complainant_name(String name)
-	{
-		this.type(this.enquiry_complainant_name,name);
+
+	public void enter_complainant_name(String name) {
+		this.type(this.enquiry_complainant_name, name);
 	}
-	
-	public void enter_enquiry_details()
-	{
-		this.type(this.enquiry_description,"This is an auto test enquiry");
-		this.type(this.enquiry_title,"Auto Test enquiry title-test");
+
+	public void enter_enquiry_details() {
+		this.type(this.enquiry_description, "This is an auto test enquiry");
+		this.type(this.enquiry_title, "Auto Test enquiry title-test");
 	}
-	
-	public void add_file_case()
-	{
+
+	public void add_file_case() {
 //		this.click(this.attachment_tab);
 //		this.click_by_text("Add attachment");
 		this.file_upload(this.file_upload, "attachment.txt");
 		this.click(this.submit);
 	}
-	
-	public void add_corrective_action_file()
-	{
+
+	public void add_corrective_action_file() {
 		this.file_upload(this.corrective_action_file, "attachment.txt");
-		//this.click(this.submit);
+		// this.click(this.submit);
+	}
+
+	public void verify_error(String error) throws InterruptedException {
+		By error_locator = By.xpath("//a[contains(text(),'"+error+"')]");
+		this.IsElementDisplayed(error_locator);
+		assertTrue("Failed:error not shown",
+				this.getText(error_locator).equals(error));
+	}
+
+	public void read_summary_element_value(String string) {
+		assertTrue("Failed,expected value is not displayed", this.find_summary_element_value(string));
+	}
+
+	public void click_link_case_left_nav(String link) {
+		By click_link = By.xpath("//a[contains(text(),'" + link + " (')]");
+		this.click(click_link);
+	}
+
+	public void click_link_case_action_greybar(String link) {
+		By click_link = By.xpath("//a[contains(@href,'/" + link + "/new')]");
+		this.click(click_link);
+	}
+
+	public void verify_label_on_the_page(String label) throws InterruptedException {
+		By page_label = By.xpath("//label[contains(text(),'"+label+"')]");
+		
+		assertTrue("Failed: label not displayed", this.IsElementDisplayed(page_label));
+
 	}
 	
-	public void verify_error(String error)
-	{
-		assertTrue("Failed:error not shown",this.driver.findElement(By.xpath("//a[contains(text(),'"+error+"')]")).getText().contains(error));
+
+	public void click_link_on_summary_page(String link) {
+		By page_link = By.xpath("//a[normalize-space()='"+link+"']");
+		this.click(page_link);
+
 	}
-	
-	public void read_summary_element_value(String string)
-	{
-		assertTrue("Failed,expected value is not displayed",this.find_summary_element_value(string));
-	}
-	
 }

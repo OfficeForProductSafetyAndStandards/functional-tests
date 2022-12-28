@@ -88,7 +88,22 @@ public class GivenSteps extends BasePage {
 	public void i_click_link(String arg1) throws Throwable {
 		casesPage.click_by_text(arg1);
 	}
+	
+	
+	//New-flow test cases
+	
+	@Given("I go to {string} in left nav")
+	public void i_go_to_in_left_nav(String string) {
+		casesPage.click_link_case_left_nav(string);
+	}
 
+	@Given("I go to enter product reference number page")
+	public void i_go_to_enter_product_reference_number_page() {
+		casesPage.click_link_case_left_nav("Products");
+		casesPage.click_link_on_summary_page("Add a product to the case");
+	}
+
+	
 //	@After()
 //	/*
 //	 * Embed a screenshot in test report if test is marked as failed

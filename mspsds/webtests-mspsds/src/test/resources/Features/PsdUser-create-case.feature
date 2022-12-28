@@ -77,62 +77,58 @@ When I click link "View the case"
 Then I should see on the summary page "Product reported as safe and compliant"
 
 #Add a product to the case 
+@regression
 Scenario:Add a product to the case
-Given I open a case "QA-Automated test case" 
-And I go to products tab
-And I click "Add product"
-Then I should search product page
+Given I login as Trading standard user
+And I open case "QA-Autognerated test casez2xkbwzk" 
+And I go to "Products" in left nav
+When I click "Add a product to the case" on case summary page
+Then I should see label "Enter a"
 
-When I enter the productid "88"
+When I enter the productid "10"
 And I click search
-Then I should see product "xxx"
+Then I should see page "Is this the correct product record to add to your case?"
 When I click No and submit
-Then I should see product search
+Then I should see label "Enter a"
 
 #On product search confirmation - Yes
-When I enter the productid "88"
+When I enter the productid "10"
 And I click search
-Then I should see product "xxx"
+Then I should see page "Is this the correct product record to add to your case?"
 When I click Yes and submit
-Then I should see success banner with message "Product added successfully"
+Then I should see "The product record was added to the case"
 
-#Validation error message when same product is added to the case
-When I enter the productid "88"
+
+#Verify error messages on search prodcut page
+@addaproduct @regression
+Scenario: Verify error message when I try to add same product again
+Given I login as Trading standard user
+And I open case "QA-Autognerated test casez2xkbwzk" 
+And I go to enter product reference number page
+And I enter the productid "10"
 And I click search
-Then I see validation error message "Product is already added to the case"
+Then I should see error "Enter a product record which has not already been added to the case"
+
+#Empty product search
+When I enter the productid "11.2"
+And I click search
+Then I should see error "Enter a PSD product record reference number"
 
 
+#Invalid product id
+When I enter the productid "hfhhf"
+And I click search
+Then I should see error "Enter a PSD product record reference number"
 
+#Invalid product id with decimals
+When I enter the productid "11.2"
+And I click search
+Then I should see error "Enter a PSD product record reference number"
 
-
-
-
-#When I select compliance type "unsafe"
-#And I click continue on ts case creation page
-#Then I should see page "Supply chain information"
-
-#Enter supply chain information
-#When I select which parts of chain do you know as "Retailer"
-#And I click continue on ts case creation page
-#Then I should see page "Retailer details"
-#
-#Enter Retailer business details
-#When I enter business tradign name "Test Tesco"
-#And I enter legal name "Auto-test"
-#And I click continue on ts case creation page
-#Then I should see page "Has any corrective action been agreed or taken?"
-#
-#Enter corrective action no
-#When I select corrective action "No"
-#And I click continue on ts case creation page
-#Then I should see page "Other information and files"
-#
-#When I click continue on ts case creation page
-#Then I should see page "Add your own reference number"
-#
-#When I click "No"
-#And I click create case
-#Then I should see page "Case created"
+#Product id doesn't exist
+When I enter the productid "psd-2001"
+And I click search
+Then I should see error "An active product record matching psd-2001 does not exist"
 
 @ts-user 
 Scenario: Add comment activity

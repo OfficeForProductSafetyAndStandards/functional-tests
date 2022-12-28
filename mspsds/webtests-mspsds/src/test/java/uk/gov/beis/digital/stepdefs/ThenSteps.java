@@ -132,6 +132,16 @@ public ThenSteps(SharedWebdriver driver)
 		casesPage.verify_summary_page_element_text(string);
 	}
 
+	@Then("I should see search product page")
+	public void i_should_see_search_product_page() {
+		
+	}
+	
+	@Then("I should see label {string}")
+	public void i_should_see_label(String string) throws InterruptedException {
+		casesPage.verify_label_on_the_page(string);
+		
+	}
 	
 	
 //	@After()

@@ -349,6 +349,10 @@ public class BasePage {
 		// driver.findElement(By.xpath("//button[contains(.,'Continue')]")).click();
 	}
 
+	public void click_continue(String button_text) {
+		driver.findElement(By.xpath("//button[normalize-space()='" + button_text + "']")).click();
+	}
+
 	public void click_create_button() {
 		driver.findElement(By.xpath("//button[normalize-space()='Create project']")).click();
 
@@ -416,28 +420,20 @@ public class BasePage {
 	public boolean find_summary_element_value(String expected_value) {
 		boolean element_flag = false;
 		List<WebElement> summary_list = this.driver.findElements(By.cssSelector(".govuk-summary-list__value"));
-		
-		for(WebElement dd : summary_list)
-		{
-			if(dd.getText().contains(expected_value))
-				{
+
+		for (WebElement dd : summary_list) {
+			if (dd.getText().contains(expected_value)) {
 				element_flag = true;
 				break;
-				}
+			}
 		}
 		return element_flag;
-		
+
 	}
-		
-			
-		
-		
-	
-	
 
 	/*
-	 * This method is to actual validation error on the page To validate with
-	 * expected error message. Use within page pagebjects
+	 * This method is to verify actual validation error with expected errors
+	 * 
 	 */
 	public String read_error_summary(By locator) {
 
@@ -447,13 +443,14 @@ public class BasePage {
 	}
 
 	/*
-	 * This method is to return h1 on any given page To Valiate with expected h1 and
-	 * ensure it is correct page
+	 * This method is to return h1 on any given page To Validate with expected h1
+	 * and ensure it is correct page
 	 */
 	public void verify_page_h1(String h1) throws InterruptedException {
+		By h1_header = By.xpath("//h1[contains(text(),'" + h1 + "')]");
 		this.IsElementDisplayed(page_h1);
-		String actual_h1 = driver.findElement(page_h1).getText();
-		assertTrue("Failed:" + actual_h1 + " doesn't match expected " + h1, (actual_h1).equalsIgnoreCase(h1));
+		String actual_h1 = driver.findElement(h1_header).getText();
+		assertTrue("Failed:" + actual_h1 + " doesn't match expected " + h1, (actual_h1).equals(h1));
 	}
 
 }
