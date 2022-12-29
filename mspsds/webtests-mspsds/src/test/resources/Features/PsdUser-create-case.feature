@@ -99,7 +99,7 @@ When I click Yes and submit
 Then I should see "The product record was added to the case"
 
 
-#Verify error messages on search prodcut page
+#Verify error messages on search product page
 @addaproduct @regression
 Scenario: Verify error message when I try to add same product again
 Given I login as Trading standard user
@@ -129,6 +129,8 @@ Then I should see error "Enter a PSD product record reference number"
 When I enter the productid "psd-2001"
 And I click search
 Then I should see error "An active product record matching psd-2001 does not exist"
+
+
 
 @ts-user 
 Scenario: Add comment activity

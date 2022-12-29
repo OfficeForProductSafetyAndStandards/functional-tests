@@ -484,13 +484,13 @@ public class WhenSteps extends BasePage {
 
 	@When("I click search")
 	public void i_click_search() {
-	    addProductPage.click_continue();
-		
+		addProductPage.click_continue();
+
 	}
 
 	@Then("I should see product {string}")
 	public void i_should_see_product(String string) throws InterruptedException {
-	addProductPage.verify_page_h1(string);
+		addProductPage.verify_page_h1(string);
 	}
 
 	@When("I click No and submit")
@@ -501,7 +501,7 @@ public class WhenSteps extends BasePage {
 
 	@Then("I should see product search")
 	public void i_should_see_product_search() {
-		
+
 	}
 
 	@When("I click Yes and submit")
@@ -510,11 +510,15 @@ public class WhenSteps extends BasePage {
 		addProductPage.click_continue("Save and continue");
 	}
 
+	@When("I click Close case on confirmation")
+	public void i_click_close_case_on_confirmation() {
+		casepge.click_button_name("Close case");
+	}
 
-	@Then("I see validation error message {string}")
-	public void i_see_validation_error_message(String string) {
-		
-		
+	@When("I open the closed case {string}")
+	public void i_open_the_closed_case(String string) throws InterruptedException {
+		casepge.open_a_closed_case(string);
+
 	}
 
 //	@After()

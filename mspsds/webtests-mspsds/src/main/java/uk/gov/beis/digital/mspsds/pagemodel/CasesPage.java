@@ -146,10 +146,18 @@ public class CasesPage extends BasePage {
 
 	}
 
-	public void open_a_case(String case_title) {
+	public void open_a_case(String case_title) throws InterruptedException {
 		this.click_by_text("All cases");
 		this.click_by_text(case_title);
 	}
+
+	public void open_a_closed_case(String case_title) throws InterruptedException {
+		this.click_by_text("All cases");
+		this.select_radio_button_by_text("Closed");
+		this.click_button_name("Apply");
+		this.click_by_text(case_title);
+	}
+
 	// new case flow journey
 
 	public void select_hazard(String hazard) {
@@ -240,10 +248,9 @@ public class CasesPage extends BasePage {
 	}
 
 	public void verify_error(String error) throws InterruptedException {
-		By error_locator = By.xpath("//a[contains(text(),'"+error+"')]");
+		By error_locator = By.xpath("//a[contains(text(),'" + error + "')]");
 		this.IsElementDisplayed(error_locator);
-		assertTrue("Failed:error not shown",
-				this.getText(error_locator).equals(error));
+		assertTrue("Failed:error not shown", this.getText(error_locator).equals(error));
 	}
 
 	public void read_summary_element_value(String string) {
@@ -261,16 +268,21 @@ public class CasesPage extends BasePage {
 	}
 
 	public void verify_label_on_the_page(String label) throws InterruptedException {
-		By page_label = By.xpath("//label[contains(text(),'"+label+"')]");
-		
+		By page_label = By.xpath("//label[contains(text(),'" + label + "')]");
+
 		assertTrue("Failed: label not displayed", this.IsElementDisplayed(page_label));
 
 	}
-	
 
 	public void click_link_on_summary_page(String link) {
-		By page_link = By.xpath("//a[normalize-space()='"+link+"']");
+		By page_link = By.xpath("//a[normalize-space()='" + link + "']");
 		this.click(page_link);
 
 	}
+
+	public void click_button_name(String button) {
+		By close_close = By.cssSelector("input[value='" + button + "']");
+		this.click(close_close);
+	}
+
 }

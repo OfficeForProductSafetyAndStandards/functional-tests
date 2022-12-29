@@ -141,6 +141,25 @@ public class BasePage {
 		return findelements(locator).size() > 0;
 	}
 
+	public boolean linkNotDisplayed(String link) {
+		if (this.driver.findElements(By.linkText("myLinkText")).size() > 0)
+			;
+		return true;
+
+	}
+
+	public boolean verifyElementAbsent(String locator) throws Exception {
+		try {
+			driver.findElement(By.xpath(locator));
+			System.out.println("Element Present");
+			return false;
+
+		} catch (NoSuchElementException e) {
+			System.out.println("Element absent");
+			return true;
+		}
+	}
+
 	public boolean IsElementDisplayed(By locator) throws InterruptedException {
 		WebElement element;
 		try {
@@ -224,12 +243,13 @@ public class BasePage {
 		List<WebElement> elements = this.findelements(locator);
 		for (WebElement element : elements) {
 			System.out.println(element.getText());
-			if (element.getText().equalsIgnoreCase(text)) {
+			if (element.getText().contains(text)) {
+				// if (element.getText().equalsIgnoreCase(text)) {
 
 				if (element.isDisplayed()) {
 					JavascriptExecutor js = (JavascriptExecutor) driver;
 					js.executeScript("arguments[0].style.border='3px solid blue'", element);
-					Thread.sleep(2000);
+					Thread.sleep(4000);
 				}
 
 				return flag = true;
