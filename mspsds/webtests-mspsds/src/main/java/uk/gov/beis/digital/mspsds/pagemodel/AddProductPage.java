@@ -44,29 +44,36 @@ SharedWebdriver shrdWebdriver;
 		this.driver = shrdWebdriver.getDriver();
 	}
 		
-public void enter_product_details(String category) throws InterruptedException
+public void enter_product_details() throws InterruptedException
 {
-	this.click(this.create_product_record);
-	Thread.sleep(3000);
-	this.SelectItem(this.ts_prod_category, category);
-	//this.type(this.ts_prod_category,category);
-	//find(this.ts_prod_category).sendKeys(Keys.ENTER);
-	this.type(this.ts_product_type,"Auto-test dishwasher");
-	Thread.sleep(2000);
 	this.select_radio_button_by_text("Yes");
 	Thread.sleep(5000);
 	this.driver.findElement(By.name("product[has_markings]")).click();
 	this.driver.findElement(By.name("product[markings][]")).click();
 	this.select_radio_button_by_text("Exact number known");
 	//this.type(this.ts_product_units, "20");
-	this.type(this.ts_product_name,"Day to night cream");
-	Thread.sleep(5000);
 	this.driver.findElement(By.name("product[when_placed_on_market]")).click();
 	this.type(this.ts_product_description,"This is a auto test product");
-	this.driver.findElement(By.xpath("//input[@name='commit']")).click();
-	
+	this.driver.findElement(By.xpath("//input[@name='commit']")).click();	
+}
+
+public void select_product_category(String prod_cat)
+{
+	this.driver.findElement(By.linkText("Create a product record")).click();
+	this.SelectItem(this.ts_prod_category, prod_cat);
+}
+
+public void enter_sub_cat(String sub_cat)
+{
+	this.type(this.ts_product_type,sub_cat);
 	
 }
+
+public void enter_product_name(String prod_name)
+{
+	this.type(this.ts_product_name, prod_name);
+}
+
 
 public void verify_create_product_link() throws InterruptedException
 {

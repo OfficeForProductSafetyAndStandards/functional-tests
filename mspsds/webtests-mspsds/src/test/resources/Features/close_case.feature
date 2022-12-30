@@ -20,6 +20,21 @@ Given I login as Trading standard user
 When I open the closed case "QA-Autognerated test"
 And I go to "Products" in left nav
 Then the link "Add a product to case" is not displayed
+@closecase @regression
+Scenario: when a case is closed, cannot remove time stammped version product
+Given I login as Trading standard user
+When I open the closed case "QA-Autognerated test"
+And I go to "Products" in left nav
+Then the link "Remove product" is not displayed
+
+@closecase @regression
+Scenario: When a case is closed, cannot edit
+Given I login as Trading standard user
+When I open the closed case "QA-Autognerated test"
+Then the link "Edit" is not displayed
+
+
+
 
 Scenario: Verify when I close a case which has a product owned by me and also linked to various other cases then the product will become un-owned
 

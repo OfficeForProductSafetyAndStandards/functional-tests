@@ -10,16 +10,26 @@ When I click on "Products" tab
 Then I should see page "Your products"
 And I should see the link "Create product record"
 	
-@regression  @covid @ts-case @new-flow
-Scenario: As Trading standard user, I should be able to create a product record
+@regression  @covid @ts-case @new-flow @new-product
+Scenario Outline: As Trading standard user, I should be able to create a product record
 Given I login as Trading standard user
 When I click on "Products" tab
 Then I should see page "Your products"
 And I should see the link "Create product record"
 
-When I click "Create product record"
-And I enter product details for product category "Clothing, textiles and fashion items"
+When I click "Create a product record"
+And I select product cat "<Prod_cat>"
+And I enter subcat "<Prod_subcat>"
+And I enter product name "<Prod_name>"
+And I enter other product details
 Then I should see confirmation message "Product record created"
+
+Examples:
+
+|Prod_cat								  					 |Prod_subcat        |Prod_name                      |
+|Hand sanitiser                      |Sanitising liquid	 |Lifebuoy Hand Hygiene Gel 500ml|
+|Cosmetics						  						 |FacePack powder		 |Superdrug facepack powder			 |
+
 
 @regression
 Scenario: Create another product as ts user

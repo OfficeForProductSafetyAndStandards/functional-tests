@@ -239,10 +239,7 @@ public class WhenSteps extends BasePage {
 
 	}
 
-	@When("^I enter product details for product category \"(.*?)\"$")
-	public void i_enter_product_details_for_product_category(String arg1) throws Throwable {
-		addProductPage.enter_product_details(arg1);
-	}
+	
 
 	@When("^I enter product name$")
 	public void i_enter_product_name() throws Throwable {
@@ -520,6 +517,25 @@ public class WhenSteps extends BasePage {
 		casepge.open_a_closed_case(string);
 
 	}
+	@When("I select product cat {string}")
+	public void i_select_product_cat(String string) {
+		addProductPage.select_product_category(string);
+	   
+	}
+	@When("I enter subcat {string}")
+	public void i_enter_subcat(String string) {
+	   addProductPage.enter_sub_cat(string); 
+	}
+	@When("I enter product name {string}")
+	public void i_enter_product_name(String string) throws InterruptedException {
+		addProductPage.enter_product_name(string);
+				
+	}
+	@When("I enter other product details")
+	public void i_enter_other_product_details() throws InterruptedException {
+		addProductPage.enter_product_details();
+	}
+
 
 //	@After()
 //	/*
