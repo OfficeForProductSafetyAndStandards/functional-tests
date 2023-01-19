@@ -13,6 +13,7 @@ import cucumber.api.java.en.When;
 import uk.gov.beis.cosmetics.pagemodel.AddProductPage;
 import uk.gov.beis.cosmetics.pagemodel.LoginPage;
 import uk.gov.beis.cosmetics.pagemodel.NanoMaterialPage;
+import uk.gov.beis.digital.SharedWebdriver;
 
 public class WhenSteps extends SharedWebDriver {
 
@@ -20,12 +21,15 @@ public class WhenSteps extends SharedWebDriver {
 	private LoginPage loginPage;
 	private AddProductPage addProductPage;
 	private NanoMaterialPage nanoMaterialPage;
+	SharedWebDriver shrdDriver;
 
-	public WhenSteps(SharedWebDriver driver) {
-		this.driver = driver;
-		loginPage = PageFactory.initElements(driver, LoginPage.class);
-		addProductPage = PageFactory.initElements(driver, AddProductPage.class);
-		nanoMaterialPage = PageFactory.initElements(driver, NanoMaterialPage.class);
+	public WhenSteps(SharedWebdriver shrdDriver) {
+		
+		this.driver = shrdDriver.getDriver();
+		
+		loginPage =  new LoginPage(shrdDriver);
+		addProductPage = new AddProductPage(shrdDriver);
+		nanoMaterialPage = new NanoMaterialPage(shrdDriver);
 	}
 
 	@When("^I enter internal reference number \"(.*?)\"$")

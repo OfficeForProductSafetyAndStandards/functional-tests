@@ -2,8 +2,10 @@ package uk.gov.beis.cosmetics.pagemodel;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
 import uk.gov.beis.cosmetics.Utils.EnvironmentProperties;
 import uk.gov.beis.digital.BasePage;
+import uk.gov.beis.digital.SharedWebdriver;
 
 import static org.junit.Assert.assertTrue;
 
@@ -18,9 +20,14 @@ public class LoginPage extends BasePage {
 	private By signOutLink = By.xpath("//a[text()='Sign out']");
 	private By otp_code = By.id("otp_code");
 
-	public LoginPage(WebDriver driver) {
-		super(driver);
-		this.driver = driver;
+	
+	SharedWebdriver shrdWebdriver;
+	
+	public LoginPage(SharedWebdriver shrdWebdriver) {
+		super(shrdWebdriver);
+		this.shrdWebdriver = shrdWebdriver;
+		this.driver = shrdWebdriver.getDriver();
+		
 	}
 
 	public void login_as(String username, String password) throws InterruptedException {
