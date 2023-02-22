@@ -27,7 +27,7 @@ public class GivenSteps extends BasePage {
 	private AssigneePage assigneePage;
 	private CasesPage casesPage;
 	private String platform=AppProperties.get("platform");
-	private WebDriver driver;
+	//private WebDriver driver;
 	
 	SharedWebdriver shrdDriver;
 	

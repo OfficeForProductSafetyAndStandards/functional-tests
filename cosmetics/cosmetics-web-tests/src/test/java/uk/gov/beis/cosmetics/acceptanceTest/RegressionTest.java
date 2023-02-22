@@ -2,15 +2,18 @@ package uk.gov.beis.cosmetics.acceptanceTest;
 
 import org.junit.runner.RunWith;
 
-import cucumber.api.CucumberOptions;
-import cucumber.api.junit.Cucumber;
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-	//format = { "html:target/cucumber-reports/html", "json:target/cucumber-reports/cucumber.json" },
+		
+	
 	features = { "src/test/resources/Features" },
-	tags = { " @regression","~@ignore,@Pending" },
-	glue="uk.gov.beis.cosmetics.stepdefs"
+	tags = " @regression",
+	dryRun = false,
+	glue = "uk.gov.beis.cosmetics.stepdefs",
+	 plugin = {"pretty","html:target/CucumberHTMLRep.html"}
 )
 public class RegressionTest {
 }

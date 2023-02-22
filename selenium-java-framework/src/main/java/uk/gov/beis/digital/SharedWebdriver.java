@@ -13,7 +13,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
  *
  */
 public class SharedWebdriver {
-	WebDriver driver;
+	 public WebDriver driver;
 	
 	public WebDriver getDriver()
 	{
@@ -21,7 +21,7 @@ public class SharedWebdriver {
 	}
 	
 	
-	public void setDriver()
+	public void  setDriver()
 	{
 		System.setProperty("webdriver.chrome.driver",
 				System.getProperty("user.dir") + "/src/test/resources/chromedriver");

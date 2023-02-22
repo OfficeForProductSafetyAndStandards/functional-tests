@@ -24,7 +24,7 @@ import static org.junit.Assert.assertTrue;
 
 public class GivenSteps extends BasePage {
 
-	private WebDriver driver;
+	//private WebDriver driver;
 	private LoginPage loginPage;
 	private AddProductPage addProductPage;
 	private NanoMaterialPage nanoMaterialPage;
@@ -349,20 +349,20 @@ public class GivenSteps extends BasePage {
 	 addProductPage.click_add_cosmetics_product();
 	}
 
-	@After()
+	//@After()
 	/*
 	 * Embed a screenshot in test report if test is marked as failed
 	 */
-	public void embedScreenshot(Scenario scenario) {
-		if (scenario.isFailed()) {
-			try {
-				scenario.write("Current Page URL is " + driver.getCurrentUrl());
-				// byte[] screenshot = getScreenshotAs(OutputType.BYTES);
-				byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-				scenario.embed(screenshot, "image/png");
-			} catch (WebDriverException somePlatformsDontSupportScreenshots) {
-				System.err.println(somePlatformsDontSupportScreenshots.getMessage());
-			}
-		}
+//	public void embedScreenshot(Scenario scenario) {
+//		if (scenario.isFailed()) {
+//			try {
+//				scenario.write("Current Page URL is " + driver.getCurrentUrl());
+//				// byte[] screenshot = getScreenshotAs(OutputType.BYTES);
+//				byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+//				scenario.embed(screenshot, "image/png");
+//			} catch (WebDriverException somePlatformsDontSupportScreenshots) {
+//				System.err.println(somePlatformsDontSupportScreenshots.getMessage());
+//			}
+//		}
 	}
-}
+

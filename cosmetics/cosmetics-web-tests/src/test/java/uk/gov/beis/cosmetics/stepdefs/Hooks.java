@@ -8,7 +8,8 @@ import org.openqa.selenium.WebDriver;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import uk.gov.beis.cosmetics.Utils.AppProperties;
-import uk.gov.beis.digital.SharedWebdriver;
+
+
 
 
 
@@ -19,23 +20,23 @@ import uk.gov.beis.digital.SharedWebdriver;
 public class Hooks {
 
 	WebDriver driver;
-	SharedWebdriver shrdDriver;
+	InitialiseDriverObject driverobject;
 
 	String envurl = AppProperties.get("envurl");
 
-	public Hooks(SharedWebdriver shrdDriver) {
-		this.shrdDriver = shrdDriver;
-		// this.driver = basepge.getDriver();
+	public Hooks(InitialiseDriverObject driverobject) {
+		this.driverobject = driverobject;
+		
 	}
 
 	@Before
-	public void bf() {
-		shrdDriver.setDriver();
-		shrdDriver.getDriver().navigate().to(envurl);
+	public  void bf() {
+		driverobject.setDriver();
+		driverobject.getDriver().navigate().to(envurl);
 	}
 
 	@After
 	public void af() {
-		shrdDriver.getDriver().quit();
+		//shrdDriver.getDriver().quit();
 	}
 }

@@ -31,7 +31,7 @@ Examples:
 |Cosmetics						  						 |FacePack powder		 |Superdrug facepack powder			 |
 
 
-@regression
+
 Scenario: Create another product as ts user
 Given I login as Trading standard user
 When I click on "Products" tab
@@ -45,7 +45,7 @@ Given I login as Trading standard user
 When I click on "Products" tab
 And I go to "All products - Search"
 Then I should see page "All products – Search"
-And I open the product "Day to night cream"
+And I open the product "Lifebuoy Hand Hygiene Gel 500ml"
 And I see link "Create a new case for this product"
 
 
@@ -70,7 +70,7 @@ Given I login as Trading standard user
 When I click on "Products" tab
 And I go to "All products - Search"
 Then I should see page "All products – Search"
-And I open the product "Day to night cream"
+And I open the product "Superdrug facepack powder"
 And I see link "Create a new case for this product"
 
 
@@ -90,19 +90,19 @@ Then I should see on the summary page "Product reported as safe and compliant"
 @regression
 Scenario:Add a product to the case
 Given I login as Trading standard user
-And I open case "QA-Autognerated test casez2xkbwzk" 
+And I open case "QA-Autognerated test" 
 And I go to "Products" in left nav
 When I click "Add a product to the case" on case summary page
 Then I should see label "Enter a"
 
-When I enter the productid "10"
+When I enter the productid "11"
 And I click search
 Then I should see page "Is this the correct product record to add to your case?"
 When I click No and submit
 Then I should see label "Enter a"
 
 #On product search confirmation - Yes
-When I enter the productid "10"
+When I enter the productid "11"
 And I click search
 Then I should see page "Is this the correct product record to add to your case?"
 When I click Yes and submit
@@ -113,7 +113,7 @@ Then I should see "The product record was added to the case"
 @addaproduct @regression
 Scenario: Verify error message when I try to add same product again
 Given I login as Trading standard user
-And I open case "QA-Autognerated test casez2xkbwzk" 
+And I open case "QA-Autognerated test" 
 And I go to enter product reference number page
 And I enter the productid "10"
 And I click search

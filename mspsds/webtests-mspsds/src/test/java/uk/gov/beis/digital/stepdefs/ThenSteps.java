@@ -149,7 +149,7 @@ public class ThenSteps extends BasePage {
 	public void i_should_see_product_becomes_timestamped_version() throws InterruptedException {
 
 		casesPage.verify_summary_page_element_text(
-				"The PSD reference for this version of the product record - as recorded when the case was closed");
+				"The PSD reference number for this version of the product record - as recorded when the case was closed");
 	}
 
 	@Then("the link {string} is not displayed")

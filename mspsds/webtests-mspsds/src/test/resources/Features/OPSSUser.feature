@@ -59,7 +59,7 @@ Examples:
 
 	
 @regression  @covid @ts-case @new-flow @new-product
-Scenario Outline: As Trading standard user, I should be able to create a product record
+Scenario Outline: As as OPSS user, I should be able to create a product record
 Given I login as OPSS user
 When I click on "Products" tab
 Then I should see page "Your products"
@@ -80,13 +80,13 @@ Examples:
 
 @regression
 Scenario:Add a product to the case
-Given I login as Trading standard user
+Given I login as OPSS user
 And I open case "Clothing" 
 And I go to "Products" in left nav
 When I click "Add a product to the case" on case summary page
 Then I should see label "Enter a"
 
-When I enter the productid "45"
+When I enter the productid "12"
 And I click search
 Then I should see page "Is this the correct product record to add to your case?"
 When I click Yes and submit
