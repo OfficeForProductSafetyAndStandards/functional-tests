@@ -115,7 +115,7 @@ Scenario: Verify error message when I try to add same product again
 Given I login as Trading standard user
 And I open case "QA-Autognerated test" 
 And I go to enter product reference number page
-And I enter the productid "10"
+And I enter the productid "11"
 And I click search
 Then I should see error "Enter a product record which has not already been added to the case"
 
