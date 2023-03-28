@@ -16,23 +16,28 @@ import uk.gov.beis.cosmetics.Utils.EnvironmentProperties;
 import uk.gov.beis.cosmetics.pagemodel.AddProductPage;
 import uk.gov.beis.cosmetics.pagemodel.LoginPage;
 import uk.gov.beis.cosmetics.pagemodel.NanoMaterialPage;
+import uk.gov.beis.digital.BasePage;
+import uk.gov.beis.digital.SharedWebdriver;
 
 import org.openqa.selenium.TakesScreenshot;
 import static org.junit.Assert.assertTrue;
 
-public class GivenSteps extends SharedWebDriver {
+public class GivenSteps extends BasePage {
 
-	private WebDriver driver;
+	//private WebDriver driver;
 	private LoginPage loginPage;
 	private AddProductPage addProductPage;
 	private NanoMaterialPage nanoMaterialPage;
 	private String platform = AppProperties.get("platform");
+	
+	SharedWebdriver shrdDriver;
 
-	public GivenSteps(SharedWebDriver driver) {
-		this.driver = driver;
-		loginPage = PageFactory.initElements(driver, LoginPage.class);
-		addProductPage = PageFactory.initElements(driver, AddProductPage.class);
-		nanoMaterialPage = PageFactory.initElements(driver, NanoMaterialPage.class);
+	public GivenSteps(SharedWebdriver driver) {
+		super(driver);
+		shrdDriver=driver;
+		loginPage = new LoginPage(shrdDriver);
+		addProductPage = new AddProductPage(shrdDriver);
+				
 	}
 
 	@Given("^I upload a valid file$")
@@ -344,20 +349,20 @@ public class GivenSteps extends SharedWebDriver {
 	 addProductPage.click_add_cosmetics_product();
 	}
 
-	@After()
+	//@After()
 	/*
 	 * Embed a screenshot in test report if test is marked as failed
 	 */
-	public void embedScreenshot(Scenario scenario) {
-		if (scenario.isFailed()) {
-			try {
-				scenario.write("Current Page URL is " + driver.getCurrentUrl());
-				// byte[] screenshot = getScreenshotAs(OutputType.BYTES);
-				byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-				scenario.embed(screenshot, "image/png");
-			} catch (WebDriverException somePlatformsDontSupportScreenshots) {
-				System.err.println(somePlatformsDontSupportScreenshots.getMessage());
-			}
-		}
+//	public void embedScreenshot(Scenario scenario) {
+//		if (scenario.isFailed()) {
+//			try {
+//				scenario.write("Current Page URL is " + driver.getCurrentUrl());
+//				// byte[] screenshot = getScreenshotAs(OutputType.BYTES);
+//				byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+//				scenario.embed(screenshot, "image/png");
+//			} catch (WebDriverException somePlatformsDontSupportScreenshots) {
+//				System.err.println(somePlatformsDontSupportScreenshots.getMessage());
+//			}
+//		}
 	}
-}
+

@@ -8,10 +8,10 @@ import uk.gov.beis.digital.*;
 
 public class AddProductPage extends BasePage {
 	private WebDriver driver;
-
-	public AddProductPage(WebDriver driver) {
-		super(driver);
-		this.driver = driver;
+	SharedWebdriver shrdWebdriver;
+	public AddProductPage(SharedWebdriver shrdDriver) {
+		super(shrdDriver);
+		this.driver = shrdDriver.getDriver();
 
 	}
 

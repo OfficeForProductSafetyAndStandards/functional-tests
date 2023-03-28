@@ -57,6 +57,42 @@ Examples:
 |Cosmetics						  						 |Burns		   |
 
 
+	
+@regression  @covid @ts-case @new-flow @new-product
+Scenario Outline: As as OPSS user, I should be able to create a product record
+Given I login as OPSS user
+When I click on "Products" tab
+Then I should see page "Your products"
+And I should see the link "Create product record"
+
+When I click "Create a product record"
+And I select product cat "<Prod_cat>"
+And I enter subcat "<Prod_subcat>"
+And I enter product name "<Prod_name>"
+And I enter other product details
+Then I should see confirmation message "Product record created"
+
+Examples:
+
+|Prod_cat								  					 |Prod_subcat        |Prod_name                      |
+|Decorative articles                 |Fairy led lights	 |Fairy music LED lights-10W		 |
+|Gas appliances and components			 |Gas Hob       		 |Beko 8 burner Gas hob					 |
+
+@regression
+Scenario:Add a product to the case
+Given I login as OPSS user
+And I open case "Clothing" 
+And I go to "Products" in left nav
+When I click "Add a product to the case" on case summary page
+Then I should see label "Enter a"
+
+When I enter the productid "12"
+And I click search
+Then I should see page "Is this the correct product record to add to your case?"
+When I click Yes and submit
+Then I should see "The product record was added to the case"
+
+
 @regression @enquiry @fix
 Scenario: As opss user, I should be able to create an enquiry
 Given I login as OPSS user

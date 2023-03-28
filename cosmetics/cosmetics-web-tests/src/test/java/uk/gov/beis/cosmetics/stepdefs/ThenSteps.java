@@ -13,17 +13,21 @@ import cucumber.api.java.After;
 import cucumber.api.java.en.Then;
 import uk.gov.beis.cosmetics.pagemodel.AddProductPage;
 import uk.gov.beis.cosmetics.pagemodel.LoginPage;
+import uk.gov.beis.digital.BasePage;
+import uk.gov.beis.digital.SharedWebdriver;
 
-public class ThenSteps extends SharedWebDriver {
-
+public class ThenSteps extends BasePage{
 	private WebDriver driver;
 	private LoginPage loginPage;
 	private AddProductPage addProductPage;
 
-	public ThenSteps(SharedWebDriver driver) {
-		this.driver = driver;
-		loginPage = PageFactory.initElements(driver, LoginPage.class);
-		addProductPage = PageFactory.initElements(driver, AddProductPage.class);
+
+	public ThenSteps(SharedWebdriver shrdDriver) {
+		super(shrdDriver);
+		this.driver = shrdDriver.getDriver();
+		
+		loginPage = new LoginPage(shrdDriver);
+		addProductPage = new AddProductPage(shrdDriver);
 	}
 
 	@Then("^I should be presented with anti-dandruff agents form page to enter details$")
