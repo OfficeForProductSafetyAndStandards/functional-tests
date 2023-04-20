@@ -15,7 +15,7 @@
     
           <cucumber-jvm.version>1.1.8</cucumber-jvm.version>
         <selenium.version>3.14.0</selenium.version>
-        <junit.version>4.11</junit.version>
+        <junit.version>4.13.1</junit.version>
   </properties>
    <dependencies>
         <dependency>
